@@ -8,6 +8,7 @@ import Fotoer from './Components/Footer/Footer'
 import Carousel from './Components/Carousel/Carousel'
 import ProductSlider from './Components/ProductSlider/ProductSlider';
 import ProductCard from './Components/ProductCard/ProductCard';
+import CategoryCard from './Components/CategoryCard/CategoryCard';
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Carousel />
         <ProductSlider />
         <ProductCard />
+        <CategoryCard />
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
             {
