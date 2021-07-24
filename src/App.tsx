@@ -6,6 +6,7 @@ import MyCarousel from './Components/Carousel/Carousel';
 import ProductSlider from './Components/ProductSlider/ProductSlider';
 import ProductCard from './Components/ProductCard/ProductCard';
 import routes from './Routes/mainRoutes'
+import { Suspense } from 'react';
 function App() {
   return (
     <Router>
@@ -17,18 +18,20 @@ function App() {
           <ProductCard />
         </div>
       </div>
+      <Suspense fallback={<div>loading...</div>}>
       <Switch>
         {
-          routes.map(({ path, exact, component }) => {
+          routes.map(({ path, exact, Component }) => {
             return (
               <Route
                 path={path}
                 exact={exact}
-                render={(props) => <component {...props} />}
+                render={(props) => <Component {...props} />}
               />)
-          }
+          })
         }
       </Switch>
+      </Suspense>
     </Router>
   );
 }
