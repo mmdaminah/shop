@@ -1,0 +1,6 @@
+.product-card-container {
+    width: 280px;
+}
+.product-card-container:hover {
+    background-color: #F8f8f8;
+}
