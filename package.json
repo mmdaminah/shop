@@ -48,5 +48,6 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
     "file-loader": "^6.2.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

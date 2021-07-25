@@ -1,33 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+interface IMobile {
+    id:string;
+    category:string;
+    brand:string;
+    model:string;
+    image?:string
+}
 const ProductSlider = () => {
-    const [firstItem, setFirstItem] = useState(0);
-    const numberOfItemsToShow = 4;
+    const [items, setItems] = useState<IMobile[]>([])
+    const [itemsShow, setItemsShow] = useState<IMobile[]>([])
+    const [startItem,setStartItem] = useState(0)
     const itemToSlide = 1;
-    const items = ["bg-dark", "bg-success", "bg-primary", "bg-danger", "bg-warning", "bg-success", "bg-primary", "bg-danger", "bg-warning"]
-    const [itemsToShow, setItemsToShow] = useState(items.slice(0, numberOfItemsToShow))
-    const handleRightSlide = () => {
-        if (firstItem + numberOfItemsToShow !== items.length) {
-            setFirstItem(firstItem + itemToSlide)
-            setItemsToShow(items.slice(firstItem + itemToSlide, firstItem + itemToSlide + numberOfItemsToShow))
-        }
+    const itemsToShow = 4;
+    const request = ()=> {
+        fetch("https://api.github.com/users")
+        .then(response => response.json())
+        .then(result=> {
+            console.log(result)
+            setItems(result)
+        })
     }
-    const handleLeftSlide = () => {
-        if (firstItem !== 0) {
-            setFirstItem(firstItem - itemToSlide)
-            setItemsToShow(items.slice(firstItem - itemToSlide, firstItem - itemToSlide + numberOfItemsToShow))
-        }
+    const requestLocal = ()=> {
+        fetch("/mobile")
+        .then(response => response.json())
+        .then(result=> {
+            console.log(result.phones)
+            setItems(result.phones)
+        })
+    }
+    useEffect(()=>{
+        requestLocal();
+    }, [])
+    // useEffect(()=>setItemsShow(items.slice(0,1)),[items])
+    const handleRight = ()=>{
+        const start = startItem + itemToSlide;
+        const end = startItem + itemToSlide + itemsToShow
+        setStartItem(startItem + itemToSlide)
+        setItemsShow(items.slice(start,end))
+    }
+    const handleLeft = ()=>{
+        
     }
     return (
-        <div className="d-flex flex-column">
-            <h1>title</h1>
+        <div className="d-flex flex-column"><img src={items[0].image} alt="" />
+            <h1>title</h1>{console.log(items[0])}
             <div className="d-flex">
-                <button onClick={handleRightSlide}>right</button>
+                <button onClick={handleRight}>right</button>
                 {
-                    itemsToShow.map((item, index) => (
-                        <div key={index + item} className={`w-25 h-25 ${item}`}>2</div>)
-                    )
+                    itemsShow?.map((item:any)=>{
+                        return (
+                            <img style={{width:'100px',height:"100px"}} src={item.avatar_url} alt="" />
+                        )
+                    })
                 }
-                <button onClick={handleLeftSlide}>left</button>
+                <button onClick={handleLeft}>left</button>
             </div>
         </div>
     )
