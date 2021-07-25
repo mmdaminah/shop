@@ -7,7 +7,6 @@ import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
 import Carousel from './Components/Carousel/Carousel'
 import ProductSlider from './Components/ProductSlider/ProductSlider';
-import ProductCard from './Components/ProductCard/ProductCard';
 import CategoryCard from './Components/CategoryCard/CategoryCard';
 function App() {
   return (
@@ -15,8 +14,9 @@ function App() {
       <div className="app">
         <MyNavbar />
         <Carousel />
-        <ProductSlider />
-        <ProductCard />
+        <ProductSlider title={"گوشی"} background={"bg-primary"} url="/mobile" />
+        <ProductSlider title={"تبلت"} background={"bg-danger"} url="/tablet"/>
+        <ProductSlider title={"لپ تاپ"} background={"bg-warning"} url="/laptop"/>
         <CategoryCard />
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
