@@ -53,6 +53,7 @@ const ProductSlider = (props:any) => {
                         itemsShow?.map((item: IMobile) => {
                             return (
                                 <ProductCard
+                                    key={item.id}
                                     image={item.image}
                                     model={item.model}
                                     category={item.category}

@@ -1,9 +1,10 @@
 import React from 'react'
+import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown} from 'react-bootstrap'
 const MyNavbar = () => {
     return (
         <Navbar bg="light" expand="lg" className="w-100 d-flex flex-column">
-            <div className="w-100 d-flex justify-content-between">
+            <div className="w-100 d-flex justify-content-between container">
                 <Navbar.Brand href="#">Navbar Brand</Navbar.Brand>
                 <Form className="d-flex w-50">
                     <FormControl
@@ -14,12 +15,12 @@ const MyNavbar = () => {
                     />
                 </Form>
                 <div className="d-flex">
-                    <Nav.Link href="#link">login</Nav.Link>
-                    <Nav.Link href="#link">wishlist</Nav.Link>
-                    <Nav.Link href="#link">cart</Nav.Link>
+                    <Nav.Link href="#link"><MdAccountCircle/></Nav.Link>
+                    <Nav.Link href="#link"><MdFavorite /></Nav.Link>
+                    <Nav.Link href="#link"><MdShoppingCart /></Nav.Link>
                 </div>
             </div>
-            <div className="w-100">
+            <div className="w-100 container">
                 <Nav
                     className="d-flex flex-row"
                     activeKey="/home"
@@ -28,7 +29,7 @@ const MyNavbar = () => {
                     <Nav.Item>
                         <Dropdown>
                             <Dropdown.Toggle variant="" id="dropdown-basic">
-                                Dropdown Button
+                                dfdgfdg
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
@@ -39,10 +40,13 @@ const MyNavbar = () => {
                         </Dropdown>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-1">important 1</Nav.Link>
+                        <Nav.Link eventKey="link-1">گوشی</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-2">important 2</Nav.Link>
+                        <Nav.Link eventKey="link-2">تبلت</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-2">لپ تاپ</Nav.Link>
                     </Nav.Item>
                 </Nav>
             </div>

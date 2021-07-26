@@ -1,9 +1,8 @@
 import { Carousel } from 'react-bootstrap'
-import './Carousel.style.css'
 const MyCarousel = () => {
     return (
-        <div className="d-flex justify-content-center">
-            <Carousel className="carousel mt-5">
+        <div className="d-flex w-100">
+            <Carousel className="w-100">
                 <Carousel.Item>
                     <img
                         className="d-block w-100"

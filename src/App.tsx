@@ -13,11 +13,7 @@ function App() {
     <Router>
       <div className="app">
         <MyNavbar />
-        <Carousel />
-        <ProductSlider title={"گوشی"} background={"bg-primary"} url="/mobile" />
-        <ProductSlider title={"تبلت"} background={"bg-danger"} url="/tablet"/>
-        <ProductSlider title={"لپ تاپ"} background={"bg-warning"} url="/laptop"/>
-        <CategoryCard />
+        
         <Suspense fallback={<div>loading...</div>}>
           <Switch>
             {
