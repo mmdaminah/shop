@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Breadcrumb } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { RouteComponentProps } from 'react-router'
 import ProductCard from '../../Components/ProductCard/ProductCard'
 import { useParams } from 'react-router-dom'
@@ -19,23 +19,26 @@ export const Category = (props: RouteComponentProps) => {
         request();
     }, [])
     return (
-        <div style={{ marginTop: "10rem" }}>
+        <div style={{ marginTop: "8rem" }}>
             <div className="container">
                 <span>{name}</span>
                 <span> &lt; home</span>
             </div>
-            <div className="container">
+            <div className="container my-3">
                 <span>مرتب سازی به صورت:</span>
-                <button>ارزانترین</button>
-                <button>گرانترین</button>
-                <button>جدیدترین</button>
+                <Button className="mx-2" variant="outline-secondary">ارزانترین</Button>
+                <Button className="mx-2" variant="outline-secondary">گرانترین</Button>
+                <Button className="mx-2" variant="outline-secondary">جدیدترین</Button>
             </div>
-            <div className="container d-flex">
-                <div className="">
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
+            <div className="container d-flex my-5">
+                <div className="mt-5">
+                    <div><strong>برند</strong></div>
+                    <div>
+                        <ul>
+                            <li style={{listStyle:"none"}}><input className="mx-1" type="checkbox" name="" id="" />Apple</li>
+                            <li style={{listStyle:"none"}}><input className="mx-1" type="checkbox" name="" id="" />Samsung</li>
+                        </ul>
+                    </div>
                 </div>
                 <div className="d-flex flex-wrap w-75">
                     {

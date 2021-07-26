@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
-import { Navbar, Nav, Form, FormControl, Dropdown} from 'react-bootstrap'
+import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap'
 const MyNavbar = () => {
     return (
         <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
@@ -15,27 +15,45 @@ const MyNavbar = () => {
                     />
                 </Form>
                 <div className="d-flex">
-                    <Nav.Link href="#link"><MdAccountCircle/></Nav.Link>
+                    <Nav.Link href="#link"><MdAccountCircle /></Nav.Link>
                     <Nav.Link href="#link"><MdFavorite /></Nav.Link>
                     <Nav.Link href="#link"><MdShoppingCart /></Nav.Link>
                 </div>
             </div>
             <div className="w-100 container">
                 <Nav
-                    className="d-flex flex-row"
+                    className="d-flex flex-row w-100"
                     activeKey="/home"
                     onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
                 >
                     <Nav.Item>
-                        <Dropdown>
+                        <Dropdown drop="start">
                             <Dropdown.Toggle variant="" id="dropdown-basic">
                                 دسته بندی
                             </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            <Dropdown.Menu align="end" className="bg-light">
+                                <div className="d-flex p-4">
+                                    <div className="text-end">گوشی
+                                        <ul style={{ listStyle: "none" }}>
+                                            <li>Apple</li>
+                                            <li>Samsung</li>
+                                        </ul>
+                                    </div>
+                                    <div className="text-end">تبلت
+                                        <ul style={{ listStyle: "none" }}>
+                                            <li>Apple</li>
+                                            <li>Samsung</li>
+                                            <li>Microsoft</li>
+                                        </ul>
+                                    </div>
+                                    <div className="text-end">لپ تاپ
+                                        <ul style={{ listStyle: "none" }}>
+                                            <li>Apple</li>
+                                            <li>Samsung</li>
+                                            <li>Microsoft</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Nav.Item>
