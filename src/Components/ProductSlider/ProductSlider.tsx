@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
 import ProductCard from '../ProductCard/ProductCard'
-interface IMobile {
-    id: string;
-    category: string;
-    brand: string;
-    model: string;
-    image: string
-}
+import IProduct from "../../Interfaces/ProductInterface";
 const ProductSlider = (props:any) => {
-    const [items, setItems] = useState<IMobile[]>([])
-    const [itemsShow, setItemsShow] = useState<IMobile[]>([])
+    const [items, setItems] = useState<IProduct[]>([])
+    const [itemsShow, setItemsShow] = useState<IProduct[]>([])
     const [startItem, setStartItem] = useState(0)
     const itemToSlide = 1;
     const itemsToShow = 4;
@@ -50,13 +44,14 @@ const ProductSlider = (props:any) => {
                 >
                     <button className="h-25 " onClick={handleRight}>right</button>
                     {
-                        itemsShow?.map((item: IMobile) => {
+                        itemsShow?.map((item: IProduct) => {
                             return (
                                 <ProductCard
                                     key={item.id}
                                     image={item.image}
                                     model={item.model}
                                     category={item.category}
+                                    price={item.price}
                                 />
                             )
                         })
