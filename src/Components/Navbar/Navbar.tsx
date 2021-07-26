@@ -3,7 +3,7 @@ import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown} from 'react-bootstrap'
 const MyNavbar = () => {
     return (
-        <Navbar bg="light" expand="lg" className="w-100 d-flex flex-column">
+        <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
                 <Navbar.Brand href="#">Navbar Brand</Navbar.Brand>
                 <Form className="d-flex w-50">
@@ -29,7 +29,7 @@ const MyNavbar = () => {
                     <Nav.Item>
                         <Dropdown>
                             <Dropdown.Toggle variant="" id="dropdown-basic">
-                                dfdgfdg
+                                دسته بندی
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>

@@ -5,9 +5,6 @@ import MyNavbar from './Components/Navbar/Navbar';
 import routes from './Routes/mainRoutes'
 import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
-import Carousel from './Components/Carousel/Carousel'
-import ProductSlider from './Components/ProductSlider/ProductSlider';
-import CategoryCard from './Components/CategoryCard/CategoryCard';
 function App() {
   return (
     <Router>
