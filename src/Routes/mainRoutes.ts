@@ -6,12 +6,7 @@ const Category = React.lazy(()=>import("../Pages/Category/Category"))
 const routes = [
     {path:'/homepage',exact:true,Component:HomePage},
     {path:'/login',exact:true,Component:Login},
-    {path:'/dashboard',exact:true,Component:Dashboard},
+    {path:'/dashboard',exact:false,Component:Dashboard},
     {path:'/category:name',exact:false,Component:Category},
 ]
 export default routes;
-//homepage
-//login
-//product details
-//category products
-//admin dashboard
