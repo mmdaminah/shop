@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json())
+app.use(express.urlencoded({extended:false}))
 
 //data imports
 const phones = require('./data/phoneData.js')
@@ -23,7 +24,9 @@ app.get("/tablet", (req, res) => {
 });
 //post requests
 app.post("/mobile", (req, res) => {
-    console.log(res.body)
+    console.log(req.body)
+    phones.phones.products.push(req.body)
+    res.status(200).send("successed")
 });
 //files share
 app.use('/phones',express.static('phones'))
