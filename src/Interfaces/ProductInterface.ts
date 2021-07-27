@@ -4,6 +4,6 @@ interface IProduct {
     brand: string;
     model: string;
     image: string;
-    price?:number;
+    price:string;
 }
 export default IProduct;

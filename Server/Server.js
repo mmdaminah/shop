@@ -2,6 +2,20 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 
+//multer middleware
+const multer  = require('multer')
+const filteStorageEngine = multer.diskStorage({
+    destination:(req,file, cb) => {
+        cb(null, './phones')
+    },
+    filename:(req,file,cb) => {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({storage:filteStorageEngine})
+
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
@@ -23,9 +37,12 @@ app.get("/tablet", (req, res) => {
     res.send(tablets.tablets);
 });
 //post requests
-app.post("/mobile", (req, res) => {
+app.post("/mobile", upload.single('image'),(req, res) => {
     console.log(req.body)
-    phones.phones.products.push(req.body)
+    console.log(req.file)
+    const newProduct = {...req.body,image:`/phones/${req.file.filename}`}
+    phones.phones.products.push(newProduct)
+    console.log(phones.phones.products)
     res.status(200).send("successed")
 });
 //files share
