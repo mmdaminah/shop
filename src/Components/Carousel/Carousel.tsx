@@ -1,17 +1,17 @@
 import { Carousel } from 'react-bootstrap'
 const MyCarousel = () => {
     return (
-        <div className="d-flex w-100">
+        <div className="d-flex w-100 mt-2">
             <Carousel className="w-100">
                 <Carousel.Item>
                     <img
                         style={{ borderRadius: "10px" }}
                         className="d-block w-100"
-                        src= "https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-green-solid-color-background.jpg"
+                        src= "https://cdn.mos.cms.futurecdn.net/nrgKnzWePRJkQNXzo66bXM.jpg"
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h3>First slide label</h3>
+                        <h3>Newst Tablets</h3>
                         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -19,7 +19,7 @@ const MyCarousel = () => {
                     <img
                         style={{ borderRadius: "10px" }}
                         className="d-block w-100"
-                        src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-green-solid-color-background.jpg"
+                        src="https://static.giga.de/wp-content/uploads/2021/02/samsung-galaxy-s21-und-plus-ultra-google-pixel-4a-4xl-xiaomi-redmi-note-9t-android-smartphones-q_giga-P1488189.jpg"
                         alt="Second slide"
                     />
 
@@ -32,7 +32,7 @@ const MyCarousel = () => {
                     <img
                         style={{ borderRadius: "10px" }}
                         className="d-block w-100"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6nC1J8-RoPiNAFErYbgPIRyhI10aPhvQVXtn-afeB6toGz5oPM9OSYEpIihW0SA_U4bE&usqp=CAU"
+                        src="https://cdn.mos.cms.futurecdn.net/dkEx6momy9WazkfwuPRLJW.png"
                         alt="Third slide"
                     />
 

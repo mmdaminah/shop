@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap'
+import { useHistory } from 'react-router';
 const MyNavbar = () => {
+    const history = useHistory()
     return (
         <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
-                <Navbar.Brand href="#">Navbar Brand</Navbar.Brand>
+                <Navbar.Brand onClick={()=>history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
                 <Form className="d-flex w-50">
                     <FormControl
                         type="search"
@@ -33,20 +35,23 @@ const MyNavbar = () => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu align="end" className="bg-light">
                                 <div className="d-flex p-4">
-                                    <div className="text-end">گوشی
+                                    <div className="text-end">
+                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorymobile")} href="">گوشی</a>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>
                                         </ul>
                                     </div>
-                                    <div className="text-end">تبلت
+                                    <div className="text-end">
+                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorytablet")} href="">تبلت</a>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>
                                             <li>Microsoft</li>
                                         </ul>
                                     </div>
-                                    <div className="text-end">لپ تاپ
+                                    <div className="text-end">
+                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorylaptop")} href="">لپ تاپ</a>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>

@@ -9,13 +9,13 @@ export const HomePage = (props: RouteComponentProps) => {
             <div className="d-flex w-100 container">
                 <Carousel />
                 <div className="w-50">
-                    <div className="bg-warning w-100 h-50"style={{borderRadius:"10px"}}>1</div>
-                    <div className="bg-danger w-100 h-50" style={{borderRadius:"10px"}}>2</div>
+                    <div className="bg-warning w-100 h-50 mb-2 mx-2"style={{borderRadius:"10px"}}>1</div>
+                    <div className="bg-danger w-100 h-50 mx-2" style={{borderRadius:"10px"}}>2</div>
                 </div>
             </div>
-            <ProductSlider title={"گوشی"} background={"bg-light"} url="/mobile" />
-            <ProductSlider title={"تبلت"} background={"bg-light"} url="/tablet" />
-            <ProductSlider title={"لپ تاپ"} background={"bg-light"} url="/laptop" />
+            <ProductSlider title={"گوشی"} background={"bg-light"}  url="/mobile" />
+            <ProductSlider title={"تبلت"} background={"bg-light"}  url="/tablet" />
+            <ProductSlider title={"لپ تاپ"} background={"bg-light"}  url="/laptop" />
             <CategoryCard />
         </div>
     )

@@ -10,8 +10,8 @@ import Union from '../../Assets/Unoin-namad.png'
 import { MdEmail, MdPhone, MdMap, MdNearMe } from "react-icons/md"
 const Footer = () => {
     return (
-        <div className="w-100 bg-primary">
-            <div className="bg-success w-100">
+        <div className="w-100 bg-light">
+            <div className="w-100" style={{backgroundColor:"#f1f1f1"}}>
                 <div className="container">
                     <div className="row text-center">
                         <div className="col-4 p-4">
@@ -70,7 +70,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-danger text-center">
+            <div className="bg-dark text-light text-center">
                 <div>تمامی حقوق متعلق به شرکت گنده پرداز جنوبشرق می باشد.</div>
             </div>
         </div>

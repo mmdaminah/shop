@@ -6,6 +6,7 @@ import routes from './Routes/mainRoutes'
 import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
 function App() {
+  document.title="Mamad Shop"
   return (
     <Router>
       <div className="app">
