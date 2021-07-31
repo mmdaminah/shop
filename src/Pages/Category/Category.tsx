@@ -27,7 +27,7 @@ export const Category = (props: RouteComponentProps) => {
     }
     return (
         <div style={{ marginTop: "8rem" }}>
-            <div className="container">
+            <div className="container p-3 p-lg-0">
                 <span>{name}</span>
                 <span> &lt; home</span>
             </div>
@@ -47,12 +47,15 @@ export const Category = (props: RouteComponentProps) => {
                         </ul>
                     </div>
                 </div>
-                <div className="d-flex flex-wrap w-75">
+                <div className="d-flex justify-content-center flex-wrap w-75 mx-auto ">
                     {
                         items.map(((item,index) => {
                             if(index >= pagination && index <= pagination+Math.ceil(items.length/4))
                             return (
-                                <div onClick={() => history.push(`/productdetails${item.id}?category=${item.category}`)} key={item.id+Math.random()} className="w-25">
+                                <div 
+                                onClick={() => history.push(`/productdetails${item.id}?category=${item.category}`)} 
+                                key={item.id+Math.random()}
+                                className={window.innerWidth < 500 ? "w-50":"w-25"}>
                                     <ProductCard
                                         image={item.image}
                                         model={item.model}
