@@ -5,8 +5,9 @@ const MyCarousel = () => {
             <Carousel className="w-100">
                 <Carousel.Item>
                     <img
+                        style={{ borderRadius: "10px" }}
                         className="d-block w-100"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEUASVIDpPlOAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII="
+                        src= "https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-green-solid-color-background.jpg"
                         alt="First slide"
                     />
                     <Carousel.Caption>
@@ -16,6 +17,7 @@ const MyCarousel = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
+                        style={{ borderRadius: "10px" }}
                         className="d-block w-100"
                         src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-green-solid-color-background.jpg"
                         alt="Second slide"
@@ -28,6 +30,7 @@ const MyCarousel = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
+                        style={{ borderRadius: "10px" }}
                         className="d-block w-100"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6nC1J8-RoPiNAFErYbgPIRyhI10aPhvQVXtn-afeB6toGz5oPM9OSYEpIihW0SA_U4bE&usqp=CAU"
                         alt="Third slide"

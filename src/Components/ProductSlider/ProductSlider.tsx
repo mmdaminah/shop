@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import ProductCard from '../ProductCard/ProductCard'
 import IProduct from "../../Interfaces/ProductInterface";
-const ProductSlider = (props:any) => {
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/swiper.min.css";
+import "swiper/components/pagination/pagination.min.css"
+import "swiper/components/navigation/navigation.min.css"
+import SwiperCore, {
+    Pagination, Navigation
+} from 'swiper/core';
+SwiperCore.use([Pagination, Navigation]);
+const ProductSlider = (props: any) => {
     const [items, setItems] = useState<IProduct[]>([])
-    const [itemsShow, setItemsShow] = useState<IProduct[]>([])
-    const [startItem, setStartItem] = useState(0)
-    const itemToSlide = 1;
-    const itemsToShow = 4;
     const request = () => {
         fetch(props.url)
             .then(response => response.json())
@@ -18,46 +22,37 @@ const ProductSlider = (props:any) => {
     useEffect(() => {
         request();
     }, [])
-    useEffect(() => setItemsShow(items.slice(0, 4)), [items])
-    const handleRight = () => {
-        const start = startItem + itemToSlide;
-        const end = startItem + itemToSlide + itemsToShow
-        if (end !== items.length + 1) {
-            setStartItem(startItem + itemToSlide)
-            setItemsShow(items.slice(start, end))
-        }
-    }
-    const handleLeft = () => {
-        const start = startItem - itemToSlide;
-        const end = startItem - itemToSlide + itemsToShow
-        if (start >= 0) {
-            setStartItem(startItem - itemToSlide)
-            setItemsShow(items.slice(start, end))
-        }
-    }
     return (
         <div className={`d-flex flex-column p-4 my-4 ${props.background}`}>
             <div className="container">
-                <h1>{props.title}</h1>
-                <div className="d-flex align-items-center"
-                    style={{border:"1px solid black"}}
+                <Swiper
+                    slidesPerView={4} 
+                    spaceBetween={30} 
+                    slidesPerGroup={4} 
+                    loop={true} 
+                    loopFillGroupWithBlank={true} 
+                    pagination={{
+                        "clickable": true
+                    }} 
+                    navigation={true} 
+                    className="mySwiper"
                 >
-                    <button className="h-25 " onClick={handleRight}>right</button>
                     {
-                        itemsShow?.map((item: IProduct) => {
+                        items?.map((item: IProduct) => {
                             return (
-                                <ProductCard
-                                    key={item.id}
-                                    image={item.image}
-                                    model={item.model}
-                                    category={item.category}
-                                    price={item.price}
-                                />
+                                <SwiperSlide key={item.id}>
+                                    <ProductCard
+                                        image={item.image}
+                                        model={item.model}
+                                        category={item.category}
+                                        price={item.price}
+                                    />
+                                </SwiperSlide>
+
                             )
                         })
                     }
-                    <button onClick={handleLeft}>left</button>
-                </div>
+                </Swiper>
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ const ProductDetails = (props:RouteComponentProps) => {
     const [items, setItems] = useState<IProduct[]>([])
     const location = useLocation()
     const { id } = useParams<{id:string}>();
+    const product = items.find(item=>item.id === id)
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get("category")
     const request = (url: string, name: string) => {
@@ -19,9 +20,13 @@ const ProductDetails = (props:RouteComponentProps) => {
     useEffect(()=>{
         request(`/${category}`, ""+category)
     },[])
+    
     return (
         <div style={{marginTop:"10rem"}}>{console.log(category)}
-            <h1>Product details with {id}</h1>
+            <div>{product?.brand}</div>
+            <div>{product?.category}</div>
+            <div>{product?.price}</div>
+            <div>{product?.model}</div>
         </div>
     )
 }
