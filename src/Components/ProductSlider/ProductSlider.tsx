@@ -29,22 +29,22 @@ const ProductSlider = (props: any) => {
                     <h1>{props.title}</h1>
                 </div>
                 <Swiper
-                    slidesPerView={4} 
-                    spaceBetween={30} 
-                    slidesPerGroup={4} 
-                    loop={true} 
-                    loopFillGroupWithBlank={true} 
-                    pagination={{
+                    slidesPerView={window.innerWidth < 500 ? 3 : 4}
+                    spaceBetween={window.innerWidth < 500 ? 5 : 30}
+                    slidesPerGroup={window.innerWidth < 500 ? 3 : 4}
+                    loop={true}
+                    loopFillGroupWithBlank={true}
+                    pagination= {window.innerWidth < 500?false:{
                         "clickable": true
-                    }} 
-                    navigation={true} 
-                    className="mySwiper mb-5 bg-white p-5"
-                    style={{borderRadius:"10px"}}
+                    }}
+                    navigation={true}
+                    className="mySwiper mb-5 bg-white p-lg-5"
+                    style={{ borderRadius: "10px" }}
                 >
                     {
                         items?.map((item: IProduct) => {
                             return (
-                                <SwiperSlide key={Math.random()*1000}>
+                                <SwiperSlide key={Math.random() * 1000}>
                                     <ProductCard
                                         image={item.image}
                                         model={item.model}

@@ -34,7 +34,7 @@ const MyNavbar = () => {
                                 دسته بندی
                             </Dropdown.Toggle>
                             <Dropdown.Menu align="end" className="bg-light">
-                                <div className="d-flex p-4">
+                                <div className="d-flex flex-lg-row flex-column p-lg-4">
                                     <div className="text-end">
                                         <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorymobile")} href="">گوشی</a>
                                         <ul style={{ listStyle: "none" }}>

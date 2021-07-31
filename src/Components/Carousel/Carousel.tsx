@@ -3,7 +3,7 @@ import { Carousel } from 'react-bootstrap'
 const MyCarousel = () => {
     return (
         <div className="d-flex w-100 mt-2">
-            <Carousel className="w-100">
+            <Carousel className="w-100 rounded">
                 <Carousel.Item>
                     <img
                         style={{ borderRadius: "10px" }}

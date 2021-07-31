@@ -31,20 +31,20 @@ const Footer = () => {
             </div>
             <div className="container w-100 h-75 my-5">
                 <div className="row w-100 h-100">
-                    <div className="col-4">
+                    <div className="col-lg-4">
                         <div><h5>راه های ارتباطی</h5></div>
                         <div className="my-3"><MdMap /><span className="mx-2">آدرس:تهران،خیابان ولی عصر</span></div>
                         <div className="my-3"><MdPhone /><span className="mx-2">تلفن:021323435</span></div>
                         <div className="my-3"><MdNearMe /><span className="mx-2">کدپستی:7714681823</span></div>
                         <div className="my-3"><MdEmail /><span className="mx-2">ایمیل:example@gmail.com</span></div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-lg-4">
                         <div><h5>خدمات مشتریان</h5></div>
                         <div className="my-3">پاسخ به پرسشهای متدوال</div>
                         <div className="my-3">حریم خصوصی</div>
                         <div className="my-3">گزارش باگ</div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-lg-4">
                         <div className="text-center"><h5>شبکه های اجتماعی</h5></div>
                         <div className="d-flex justify-content-center my-3">
                             <div><img className="icon-social mx-3" src={Telegram} alt="" /></div>
@@ -58,8 +58,8 @@ const Footer = () => {
                         </div>
                     </div>
                     <hr className="my-4" />
-                    <div className="d-flex justify-content-between">
-                        <div className="w-50">
+                    <div className="d-flex flex-lg-row flex-column justify-content-between">
+                        <div className="w-lg-50 w-100">
                             ممد کامپیوتر یکی از جدیدترین سایتهای فروش قطعات است که از پارسال با فروش آت آشغال شروع به فعالیت کرده است.
                             امید است با همراهی شما عزیزان هر سال دسته بندیهای جدیدی به این فروشگاه اضافه شود تا بتوانیم با قدرت هرچه تمام تر جیب شمارا خالی کنیم.
                         </div>
