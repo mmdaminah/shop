@@ -50,6 +50,7 @@ const ProductSlider = (props: any) => {
                                         model={item.model}
                                         category={item.category}
                                         price={item.price}
+                                        btnColor={props.background}
                                     />
                                 </SwiperSlide>
 

@@ -1,4 +1,5 @@
 import { Carousel } from 'react-bootstrap'
+//mobile:https://static.giga.de/wp-content/uploads/2021/02/samsung-galaxy-s21-und-plus-ultra-google-pixel-4a-4xl-xiaomi-redmi-note-9t-android-smartphones-q_giga-P1488189.jpg
 const MyCarousel = () => {
     return (
         <div className="d-flex w-100 mt-2">
@@ -18,7 +19,7 @@ const MyCarousel = () => {
                 <Carousel.Item>
                     <img
                         style={{ borderRadius: "10px" }}
-                        className="d-block w-100"
+                        className="d-block w-100 h-100"
                         src="https://static.giga.de/wp-content/uploads/2021/02/samsung-galaxy-s21-und-plus-ultra-google-pixel-4a-4xl-xiaomi-redmi-note-9t-android-smartphones-q_giga-P1488189.jpg"
                         alt="Second slide"
                     />

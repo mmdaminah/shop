@@ -1,0 +1,8 @@
+.category-card-custom {
+    box-shadow: 15px 17px 14px 1px rgba(0, 0, 0, 0.31);
+}
+.category-card-custom:hover {
+    transition: 0.5s;
+    transform: scale(1.1);
+    box-shadow: 15px 17px 14px 15px rgba(0, 0, 0, 0.31);
+}
