@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { Table } from 'react-bootstrap'
 import IProduct from '../../../Interfaces/ProductInterface'
+import DashboardModal from '../../../Components/DashboardModal/DashboardModal'
 const ProductList = (props: RouteComponentProps) => {
     const [items, setItems] = useState<IProduct[]>([])
+    const [item, setItem] = useState<IProduct>()
+    const [show, setShow] = useState(false);
     const request = (url: string, name: string) => {
         fetch(url)
             .then(response => response.json())
@@ -12,9 +15,14 @@ const ProductList = (props: RouteComponentProps) => {
                 setItems(result.products)
             })
     }
+    useEffect(()=>request("/mobile","mobile"),[])
     const categoryChange = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement;
         request(`/${data.value}`, data.value)
+    }
+    const handleShow = (item:IProduct) => {
+        setShow(true);
+        setItem(item)
     }
     return (
         <div className="w-100">{console.log(items)}
@@ -31,14 +39,13 @@ const ProductList = (props: RouteComponentProps) => {
                             <th>برند</th>
                             <th>مدل</th>
                             <th>قیمت</th>
-                            <th>تغییرات</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             items.map((item,index)=>{
                                 return (
-                                    <tr key={index}>
+                                    <tr key={index} onClick={()=>handleShow(item)}>
                                         <td>{item.brand}</td>
                                         <td>{item.model}</td>
                                         <td>{item.price}</td>
@@ -48,6 +55,7 @@ const ProductList = (props: RouteComponentProps) => {
                         }
                     </tbody>
                 </Table>
+                <DashboardModal show={show} setShow={setShow} item={item} />
             </div>
         </div>
     )
