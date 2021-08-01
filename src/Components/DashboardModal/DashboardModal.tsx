@@ -1,47 +1,60 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import IProduct from '../../Interfaces/ProductInterface';
-const DashboardModal = (props: any) => {
-    const [input, setInput] = useState<IProduct>({
-        id: "",
-        category: "",
-        brand: "",
-        model: "",
-        image: "",
-        price:""
-    })
+interface IProps {
+    show:boolean;
+    setShow:Function;
+    item:IProduct
+}
+const DashboardModal = ({show,setShow,item}:IProps) => {
+    const [input, setInput] = useState<IProduct>(item)
+    useEffect(()=>{
+        setInput(item)
+    },[item])
     const handleFormChange = (event:React.FormEvent)=> {
         const data = event.target as HTMLInputElement
         setInput({...input,[data.name]:data.value})
     }
-    const handleClose = () => props.setShow(false);
+    const handleClose = () => setShow(false);
     const handleDelete = (category:string,id:string) => {
-        console.log(category,id)
         fetch(`/mobile${id}`,{
             method:'post',
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            //   },
+        })
+    }
+    const handleSubmit = (event:React.FormEvent)=>{
+        event.preventDefault()
+        const data = new FormData()
+        data.append('id',input.id)
+        data.append('category',input.category)
+        data.append('brand',input.brand)
+        data.append('model',input.model)
+        data.append('price',input.price)
+        data.append('image',input.image)
+        fetch(`/editmobile${input.id}`,{
+            method:'post',
+            body:data
         })
     }
     return (
-        <Modal show={props.show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose}>{console.log(input)}
             <Modal.Header>
                 <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form  
+                <form 
+                id="form" 
                 onChange={handleFormChange}
-                className="d-flex flex-column" action="">
+                className="d-flex flex-column" action=""
+                onSubmit={handleSubmit}
+                >
                     <label htmlFor="">دسته</label>
-                    <input defaultValue={props.item?.category} name="category" className="w-100" type="text" />
+                    <input defaultValue={item?.category} name="category" className="w-100" type="text" />
                     <label htmlFor="">برند</label>
-                    <input defaultValue={props.item?.brand} name="brand" className="w-100" type="text" />
+                    <input defaultValue={item?.brand} name="brand" className="w-100" type="text" />
                     <label htmlFor="">مدل</label>
-                    <input defaultValue={props.item?.model} name="model" className="w-100" type="text" />
+                    <input defaultValue={item?.model} name="model" className="w-100" type="text" />
                     <label htmlFor="">قیمت</label>
-                    <input defaultValue={props.item?.price} name="price" className="w-100" type="text" />
+                    <input defaultValue={item?.price} name="price" className="w-100" type="text" />
                     <input type="file" />
                 </form>
             </Modal.Body>
@@ -50,10 +63,10 @@ const DashboardModal = (props: any) => {
                     انصراف
                 </Button>
                 <Button variant="outline-danger" 
-                onClick={()=>handleDelete(props.item?.category,props.item?.id)}>
+                onClick={()=>handleDelete(item?.category,item?.id)}>
                     حذف این محصول
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button type="submit" form="form"  variant="primary">
                     ذخیره تغییرات
                 </Button>
             </Modal.Footer>

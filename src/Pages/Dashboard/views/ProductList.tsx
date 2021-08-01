@@ -5,7 +5,14 @@ import IProduct from '../../../Interfaces/ProductInterface'
 import DashboardModal from '../../../Components/DashboardModal/DashboardModal'
 const ProductList = (props: RouteComponentProps) => {
     const [items, setItems] = useState<IProduct[]>([])
-    const [item, setItem] = useState<IProduct>()
+    const [modalItem, setModalItem] = useState<IProduct>({
+        id:"",
+        brand:"",
+        category:"",
+        model:"",
+        price:"",
+        image:""
+    })
     const [show, setShow] = useState(false);
     const request = (url: string, name: string) => {
         fetch(url)
@@ -21,11 +28,11 @@ const ProductList = (props: RouteComponentProps) => {
         request(`/${data.value}`, data.value)
     }
     const handleShow = (item:IProduct) => {
+        setModalItem(item)
         setShow(true);
-        setItem(item)
     }
     return (
-        <div className="w-100">{console.log(items)}
+        <div className="w-100">
             <div className="container">
                 <label htmlFor="">دسته بندی</label>
                 <select name="category" onChange={categoryChange} id="">
@@ -45,7 +52,11 @@ const ProductList = (props: RouteComponentProps) => {
                         {
                             items.map((item,index)=>{
                                 return (
-                                    <tr key={index} onClick={()=>handleShow(item)}>
+                                    <tr 
+                                    key={index} 
+                                    onClick={()=>handleShow(item)}
+                                    style={{cursor:"pointer"}}
+                                    >
                                         <td>{item.brand}</td>
                                         <td>{item.model}</td>
                                         <td>{item.price}</td>
@@ -55,7 +66,7 @@ const ProductList = (props: RouteComponentProps) => {
                         }
                     </tbody>
                 </Table>
-                <DashboardModal show={show} setShow={setShow} item={item} />
+                <DashboardModal show={show} setShow={setShow} item={modalItem} />
             </div>
         </div>
     )

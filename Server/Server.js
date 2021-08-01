@@ -47,7 +47,6 @@ app.post("/mobile", upload.single('image'),(req, res) => {
     res.status(200).send("successed")
 });
 app.post("/mobile:id",(req, res)=>{
-    console.log(req.params.id)
     const item = phones.phones.products.find((item)=> item.id === req.params.id)
     phones.phones.products = phones.phones.products.filter((item)=> item.id !== req.params.id)
     //deletes file
@@ -57,6 +56,11 @@ app.post("/mobile:id",(req, res)=>{
       } catch(err) {
         console.error(err)
       }
+})
+app.post("/editmobile:id",upload.single('image'),(req,res)=>{
+    const id = req.params.id
+    phones.phones.products = phones.phones.products.filter((item)=> item.id !== id)
+    phones.phones.products.push(req.body)
 })
 //files share
 app.use('/phones',express.static('phones'))
