@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fs = require('fs')
 const port = process.env.PORT || 5000;
 
 //multer middleware
@@ -45,6 +46,18 @@ app.post("/mobile", upload.single('image'),(req, res) => {
     console.log(phones.phones.products)
     res.status(200).send("successed")
 });
+app.post("/mobile:id",(req, res)=>{
+    console.log(req.params.id)
+    const item = phones.phones.products.find((item)=> item.id === req.params.id)
+    phones.phones.products = phones.phones.products.filter((item)=> item.id !== req.params.id)
+    //deletes file
+    try {
+        fs.unlinkSync(`.${item?.image}`)
+        //file removed
+      } catch(err) {
+        console.error(err)
+      }
+})
 //files share
 app.use('/phones',express.static('phones'))
 app.use('/laptops',express.static('laptops'))

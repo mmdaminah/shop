@@ -19,6 +19,7 @@ const AddProduct = (props: RouteComponentProps) => {
         event.preventDefault()
         const data = new FormData()
         data.append('image',fileData)
+        data.append('id',new Date().getTime().toString())
         data.append('category',input.category)
         data.append('brand',input.brand)
         data.append('model',input.model)
