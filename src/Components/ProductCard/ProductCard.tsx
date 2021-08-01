@@ -1,8 +1,10 @@
 import './ProductCard.style.css'
 import { useDispatch } from 'react-redux';
+import React from 'react';
 const ProductCard = ({image,model,category,price,btnColor="bg-success"}:any) => {
     const dispatch = useDispatch()
-    const handleAddToCart = ()=>{
+    const handleAddToCart = (event:React.MouseEvent)=>{
+        event.stopPropagation()
         dispatch({type:"addProduct",payload:{model,category,price}})
     }
     return (

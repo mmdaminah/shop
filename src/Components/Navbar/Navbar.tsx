@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap'
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom'
 const MyNavbar = () => {
     const history = useHistory()
     return (
         <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
-                <Navbar.Brand onClick={()=>history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
+                <Navbar.Brand onClick={() => history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
                 <Form className="d-flex w-50">
                     <FormControl
                         type="search"
@@ -36,14 +37,14 @@ const MyNavbar = () => {
                             <Dropdown.Menu align="end" className="bg-light">
                                 <div className="d-flex flex-lg-row flex-column p-lg-4">
                                     <div className="text-end">
-                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorymobile")} href="">گوشی</a>
+                                        <Link style={{ textDecoration: "none" }} to="/categorymobile">گوشی</Link>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>
                                         </ul>
                                     </div>
                                     <div className="text-end">
-                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorytablet")} href="">تبلت</a>
+                                        <Link style={{ textDecoration: "none" }} to="/categorytablet">تبلت</Link>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>
@@ -51,7 +52,7 @@ const MyNavbar = () => {
                                         </ul>
                                     </div>
                                     <div className="text-end">
-                                        <a style={{ textDecoration: "none" }} onClick={() => history.push("/categorylaptop")} href="">لپ تاپ</a>
+                                        <Link style={{ textDecoration: "none" }} to="/categorylaptop">لپ تاپ</Link>
                                         <ul style={{ listStyle: "none" }}>
                                             <li>Apple</li>
                                             <li>Samsung</li>

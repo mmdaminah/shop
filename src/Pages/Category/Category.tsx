@@ -19,7 +19,7 @@ export const Category = (props: RouteComponentProps) => {
     }
     useEffect(() => {
         request();
-    }, [])
+    }, [props.location.pathname])
     const  handlePaginationClick = (event:React.MouseEvent)=>{
         const data = event.target as HTMLElement
         console.log(data.id)
