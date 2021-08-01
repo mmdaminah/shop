@@ -5,11 +5,13 @@ import MyNavbar from './Components/Navbar/Navbar';
 import routes from './Routes/mainRoutes'
 import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
+import { useSelector } from 'react-redux'
 function App() {
   document.title="Mamad Shop"
+  const cart = useSelector(state=>state)
   return (
     <Router>
-      <div className="app">
+      <div className="app">{console.log(cart)}
         <MyNavbar />
         
         <Suspense fallback={<div>loading...</div>}>
