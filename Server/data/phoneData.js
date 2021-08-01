@@ -6,7 +6,13 @@ const phones = {
             brand: "apple",
             model: "iPhone 6",
             image:"/phones/iphone6.png",
-            price:3_000_000
+            price:3_000_000,
+            specifications:{
+                cpu:"A50",
+                ram:"2",
+                rom:"64",
+                display:"5.5",
+            }
         },
         {
             id: "2",

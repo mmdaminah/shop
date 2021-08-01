@@ -5,5 +5,11 @@ interface IProduct {
     model: string;
     image: string;
     price:string;
+    specifications?:{
+        cpu:string;
+        ram:string;
+        rom:string;
+        display:string;
+    }
 }
 export default IProduct;
