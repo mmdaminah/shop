@@ -56,11 +56,13 @@ app.post("/mobile:id",(req, res)=>{
       } catch(err) {
         console.error(err)
       }
+    res.status(200).send("successed")
 })
 app.post("/editmobile:id",upload.single('image'),(req,res)=>{
     const id = req.params.id
     phones.phones.products = phones.phones.products.filter((item)=> item.id !== id)
     phones.phones.products.push(req.body)
+    res.status(200).send("successed")
 })
 //files share
 app.use('/phones',express.static('phones'))
