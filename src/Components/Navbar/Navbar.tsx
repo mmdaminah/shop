@@ -1,25 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import IProduct from '../../Interfaces/ProductInterface';
 import ICart from '../../Interfaces/CartInterface';
+import IAllProducts from '../../Interfaces/AllProducts';
 const MyNavbar = () => {
     const history = useHistory()
     const [cartShow, setCartShow] = useState(false)
     const cartItems = useSelector<ICart, IProduct[]>(state => state.cart.cartProducts)
+    const allProducts = useSelector<IAllProducts, IProduct[]>(state => state.allProducts.allProducts)
+    const handleSearch = (event:React.ChangeEvent) => {
+        const data = event.target as HTMLInputElement;
+        console.log(data.value)
+    }
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch({type:"search",payload:""})
+    },[])
     return (
         <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
-                <Navbar.Brand className="w-25" onClick={() => history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
-                <Form className="d-flex w-50">{console.log(cartItems)}
+                <Navbar.Brand className="w-25" onClick={() => history.push("/homepage")} href="#">ممدشاپ</Navbar.Brand>
+                <Form className="d-flex w-50">
                     <FormControl
                         type="search"
                         placeholder="جستجو..."
                         className="mr-2"
                         aria-label="Search"
+                        onChange={handleSearch}
                     />
                 </Form>
                 <div className="d-flex flex-row-reverse w-25">
@@ -49,9 +60,9 @@ const MyNavbar = () => {
                                     {
                                         cartItems.length === 0 ?
                                             <div>سبد خرید خالی است</div> :
-                                            <button 
-                                            onClick={()=>history.push("/cart")}
-                                            className="btn btn-danger">ثبت سفارش</button>
+                                            <button
+                                                onClick={() => history.push("/cart")}
+                                                className="btn btn-danger">ثبت سفارش</button>
                                     }
                                 </Dropdown.Item>
                             </Dropdown.Menu>
