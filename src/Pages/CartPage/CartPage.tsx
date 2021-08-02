@@ -5,8 +5,9 @@ import IProduct from '../../Interfaces/ProductInterface'
 import ICart from '../../Interfaces/CartInterface'
 import { Button } from 'react-bootstrap'
 import { MdDelete } from "react-icons/md";
+import ICartProducts from '../../Interfaces/CartProduct'
 const CartPage = (props: RouteComponentProps) => {
-    const cartItems = useSelector<ICart, IProduct[]>(state => state.cart.cartProducts)
+    const cartItems = useSelector<ICart, ICartProducts[]>(state => state.cart.cartProducts)
     return (
         <div className="w-100" style={{ marginTop: "8rem" }}>
             <div className="container w-100 d-flex">
@@ -22,7 +23,7 @@ const CartPage = (props: RouteComponentProps) => {
                                         <div>{item.model}</div>
                                         <div>
                                             <Button variant="success" size="sm">+</Button>
-                                            <span className="mx-2">0</span>
+                                            <span className="mx-2">{item.count}</span>
                                             <Button variant="danger" size="sm">-</Button>
                                         </div>
                                     </div>

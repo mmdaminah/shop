@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div className="app">{console.log(cart)}
         <MyNavbar /><Spinner animation="border" variant="primary" />
-        <Suspense fallback={<Spinner animation="border" variant="primary"  style={{width:"300px",height:"300px",position:"absolute",top:"25%", right:"40%"}}/>}>
+        <Suspense fallback={<Spinner animation="border" variant="primary"  style={{width:"300px",height:"300px",position:"absolute",top:"25%", right:"35%"}}/>}>
           <Switch>
             {
               routes.map(({ path, exact, Component },index) => {

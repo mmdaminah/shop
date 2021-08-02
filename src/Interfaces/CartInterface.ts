@@ -1,7 +1,7 @@
-import IProduct from './ProductInterface'
+import ICartProduct from '../Interfaces/CartProduct'
 interface ICart {
     cart: {
-        cartProducts: IProduct[]
+        cartProducts: ICartProduct[]
     }
 }
 export default ICart;

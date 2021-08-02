@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import IProduct from '../../Interfaces/ProductInterface';
 import ICart from '../../Interfaces/CartInterface';
+import ICartProducts from '../../Interfaces/CartProduct';
 import IAllProducts from '../../Interfaces/AllProducts';
 const MyNavbar = () => {
     const history = useHistory()
     const [cartShow, setCartShow] = useState(false)
     const [inputSearch, setInputSearch] = useState("")
     const [searchItems, setSearchItems] = useState<IProduct[]>()
-    const cartItems = useSelector<ICart, IProduct[]>(state => state.cart.cartProducts)
+    const cartItems = useSelector<ICart,ICartProducts[]>(state => state.cart.cartProducts)
     const allProducts = useSelector<IAllProducts, IProduct[]>(state => state.allProducts.allProducts)
     const handleSearch = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement;
@@ -72,7 +73,7 @@ const MyNavbar = () => {
                         <Dropdown show={cartShow} drop={window.innerWidth < 500 ? "start" : "end"}>
                             <MdShoppingCart
                                 onMouseEnter={() => setCartShow(true)}
-                                onMouseLeave={() => setCartShow(false)}
+                                // onMouseLeave={() => setCartShow(false)}
                                 style={{ width: "30px", height: "30px" }} />
                             <Dropdown.Menu>
                                 <Dropdown.Item>
@@ -86,6 +87,7 @@ const MyNavbar = () => {
                                                     <div>
                                                         <div>{item.model}</div>
                                                         <div>{item.price}</div>
+                                                        <div>{item.count}</div>
                                                     </div>
                                                 </div>
                                             )
