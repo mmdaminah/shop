@@ -5,11 +5,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import IProduct from '../../Interfaces/ProductInterface';
-interface ICart {
-    cart: {
-        cartProducts: IProduct[]
-    }
-}
+import ICart from '../../Interfaces/CartInterface';
 const MyNavbar = () => {
     const history = useHistory()
     const [cartShow, setCartShow] = useState(false)
@@ -28,19 +24,19 @@ const MyNavbar = () => {
                 </Form>
                 <div className="d-flex flex-row-reverse w-25">
                     <Nav.Link className="" href="#link">
-                        <Dropdown show={cartShow} drop={window.innerWidth < 500 ? "start":"end"}>
+                        <Dropdown show={cartShow} drop={window.innerWidth < 500 ? "start" : "end"}>
                             <MdShoppingCart
                                 onMouseEnter={() => setCartShow(true)}
-                                // onMouseLeave={() => setCartShow(false)}
+                                onMouseLeave={() => setCartShow(false)}
                                 style={{ width: "30px", height: "30px" }} />
-                            <Dropdown.Menu> 
-                                <Dropdown.Item href="#/action-1">
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
                                     {
                                         cartItems.map((item) => {
                                             return (
                                                 <div className="d-flex">
                                                     <div className="w-100 text-center">
-                                                        <img style={{width:"100px",height:"100px"}} src={item.image} alt="" />
+                                                        <img style={{ width: "100px", height: "100px" }} src={item.image} alt="" />
                                                     </div>
                                                     <div>
                                                         <div>{item.model}</div>
@@ -50,8 +46,12 @@ const MyNavbar = () => {
                                             )
                                         })
                                     }
-                                    {   
-                                        cartItems.length===0 ? <div>سبد خرید خالی است</div> : <button className="btn btn-danger">ثبت سفارش</button>
+                                    {
+                                        cartItems.length === 0 ?
+                                            <div>سبد خرید خالی است</div> :
+                                            <button 
+                                            onClick={()=>history.push("/cart")}
+                                            className="btn btn-danger">ثبت سفارش</button>
                                     }
                                 </Dropdown.Item>
                             </Dropdown.Menu>
