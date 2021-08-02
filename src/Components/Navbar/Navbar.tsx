@@ -10,11 +10,18 @@ import IAllProducts from '../../Interfaces/AllProducts';
 const MyNavbar = () => {
     const history = useHistory()
     const [cartShow, setCartShow] = useState(false)
+    const [searchItems, setSearchItems] = useState<IProduct[]>()
     const cartItems = useSelector<ICart, IProduct[]>(state => state.cart.cartProducts)
     const allProducts = useSelector<IAllProducts, IProduct[]>(state => state.allProducts.allProducts)
     const handleSearch = (event:React.ChangeEvent) => {
         const data = event.target as HTMLInputElement;
         console.log(data.value)
+        if(data.value === "")
+            setSearchItems([])
+        else
+            setSearchItems(allProducts.filter((item)=>{
+                return item.model.toLowerCase().startsWith(data.value.toLowerCase())
+            }))
     }
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -25,14 +32,31 @@ const MyNavbar = () => {
             <div className="w-100 d-flex justify-content-between container">
                 <Navbar.Brand className="w-25" onClick={() => history.push("/homepage")} href="#">ممدشاپ</Navbar.Brand>
                 <Form className="d-flex w-50">
-                    <FormControl
-                        type="search"
-                        placeholder="جستجو..."
-                        className="mr-2"
-                        aria-label="Search"
-                        onChange={handleSearch}
-                    />
-                </Form>
+                    <div className="w-100" style={{position:"relative"}}>
+                        <FormControl
+                            type="search"
+                            placeholder="جستجو..."
+                            className="mr-2"
+                            aria-label="Search"
+                            onChange={handleSearch}
+                        />
+                        <div className="bg-light w-100"  style={{height:"100px",position:"absolute", overflowY:"scroll"}}>
+                            {
+                                searchItems?.map((item)=>{
+                                    return (
+                                        <div className="d-flex w-100">
+                                            <div><img style={{width:"80px",height:"80px"}} src={item.image} alt="" /></div>
+                                            <div>
+                                                <div>{item.model}</div>
+                                                <div>{item.category}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                </Form>{console.log(searchItems)}
                 <div className="d-flex flex-row-reverse w-25">
                     <Nav.Link className="" href="#link">
                         <Dropdown show={cartShow} drop={window.innerWidth < 500 ? "start" : "end"}>
