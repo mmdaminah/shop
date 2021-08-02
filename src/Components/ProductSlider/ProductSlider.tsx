@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductCard from '../ProductCard/ProductCard'
 import IProduct from "../../Interfaces/ProductInterface";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useHistory } from "react-router";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
@@ -11,6 +12,7 @@ import SwiperCore, {
 SwiperCore.use([Pagination, Navigation]);
 const ProductSlider = (props: any) => {
     const [items, setItems] = useState<IProduct[]>([])
+    const history = useHistory()
     const request = () => {
         fetch(props.url)
             .then(response => response.json())
@@ -34,7 +36,7 @@ const ProductSlider = (props: any) => {
                     slidesPerGroup={window.innerWidth < 500 ? 3 : 4}
                     loop={true}
                     loopFillGroupWithBlank={true}
-                    pagination= {window.innerWidth < 500?false:{
+                    pagination={window.innerWidth < 500 ? false : {
                         "clickable": true
                     }}
                     navigation={true}
@@ -45,13 +47,17 @@ const ProductSlider = (props: any) => {
                         items?.map((item: IProduct) => {
                             return (
                                 <SwiperSlide key={Math.random() * 1000}>
-                                    <ProductCard
-                                        image={item.image}
-                                        model={item.model}
-                                        category={item.category}
-                                        price={item.price}
-                                        btnColor={props.background}
-                                    />
+                                    <div
+                                        onClick={() => history.push(`/productdetails${item.id}?category=${item.category}`)}
+                                    >
+                                        <ProductCard
+                                            image={item.image}
+                                            model={item.model}
+                                            category={item.category}
+                                            price={item.price}
+                                            btnColor={props.background}
+                                        />
+                                    </div>
                                 </SwiperSlide>
 
                             )
