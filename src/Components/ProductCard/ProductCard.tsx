@@ -5,7 +5,7 @@ const ProductCard = ({image,model,category,price,btnColor="bg-success"}:any) => 
     const dispatch = useDispatch()
     const handleAddToCart = (event:React.MouseEvent)=>{
         event.stopPropagation()
-        dispatch({type:"addProduct",payload:{model,category,price}})
+        dispatch({type:"addProduct",payload:{model,category,price,image}})
     }
     return (
         <div className="product-card-container w-100" >

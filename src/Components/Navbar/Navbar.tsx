@@ -3,13 +3,22 @@ import { MdShoppingCart, MdAccountCircle, MdFavorite } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import IProduct from '../../Interfaces/ProductInterface';
+interface ICart {
+    cart: {
+        cartProducts: IProduct[]
+    }
+}
 const MyNavbar = () => {
     const history = useHistory()
+    const [cartShow, setCartShow] = useState(false)
+    const cartItems = useSelector<ICart, IProduct[]>(state => state.cart.cartProducts)
     return (
         <Navbar fixed="top" bg="light" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
-                <Navbar.Brand onClick={() => history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
-                <Form className="d-flex w-50">
+                <Navbar.Brand className="w-25" onClick={() => history.push("/homepage")} href="#">Navbar Brand</Navbar.Brand>
+                <Form className="d-flex w-50">{console.log(cartItems)}
                     <FormControl
                         type="search"
                         placeholder="جستجو..."
@@ -17,10 +26,43 @@ const MyNavbar = () => {
                         aria-label="Search"
                     />
                 </Form>
-                <div className="d-flex">
-                    <Nav.Link href="#link"><MdAccountCircle /></Nav.Link>
-                    <Nav.Link href="#link"><MdFavorite /></Nav.Link>
-                    <Nav.Link href="#link"><MdShoppingCart /></Nav.Link>
+                <div className="d-flex flex-row-reverse w-25">
+                    <Nav.Link className="" href="#link">
+                        <Dropdown show={cartShow} drop={window.innerWidth < 500 ? "start":"end"}>
+                            <MdShoppingCart
+                                onMouseEnter={() => setCartShow(true)}
+                                // onMouseLeave={() => setCartShow(false)}
+                                style={{ width: "30px", height: "30px" }} />
+                            <Dropdown.Menu> 
+                                <Dropdown.Item href="#/action-1">
+                                    {
+                                        cartItems.map((item) => {
+                                            return (
+                                                <div className="d-flex">
+                                                    <div className="w-100 text-center">
+                                                        <img style={{width:"100px",height:"100px"}} src={item.image} alt="" />
+                                                    </div>
+                                                    <div>
+                                                        <div>{item.model}</div>
+                                                        <div>{item.price}</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                    {   
+                                        cartItems.length===0 ? <div>سبد خرید خالی است</div> : <button className="btn btn-danger">ثبت سفارش</button>
+                                    }
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Nav.Link>
+                    <Nav.Link href="#link">
+                        <MdAccountCircle style={{ width: "30px", height: "30px" }} />
+                    </Nav.Link>
+                    <Nav.Link href="#link">
+                        <MdFavorite style={{ width: "30px", height: "30px" }} />
+                    </Nav.Link>
                 </div>
             </div>
             <div className="w-100 container">
