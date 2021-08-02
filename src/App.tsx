@@ -6,15 +6,15 @@ import routes from './Routes/mainRoutes'
 import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
 import { useSelector } from 'react-redux'
+import { Spinner } from 'react-bootstrap';
 function App() {
   document.title="Mamad Shop"
   const cart = useSelector(state=>state)
   return (
     <Router>
       <div className="app">{console.log(cart)}
-        <MyNavbar />
-        
-        <Suspense fallback={<div>loading...</div>}>
+        <MyNavbar /><Spinner animation="border" variant="primary" />
+        <Suspense fallback={<Spinner animation="border" variant="primary"  style={{width:"300px",height:"300px",position:"absolute",top:"25%", right:"40%"}}/>}>
           <Switch>
             {
               routes.map(({ path, exact, Component },index) => {
