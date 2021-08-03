@@ -42,7 +42,7 @@ export const Category = (props: RouteComponentProps) => {
         <div style={{ marginTop: "8rem" }}>{console.log(items)}
             <div className="container p-3 p-lg-0">
                 <span>{name}</span>
-                <span> &lt; home</span>
+                <span style={{cursor:"pointer"}} onClick={()=>history.push("/homepage")}> &lt; home</span>
             </div>
             <div className="container my-3">
                 <span>مرتب سازی به صورت:</span>

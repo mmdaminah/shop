@@ -4,6 +4,7 @@ import { useParams, useLocation } from 'react-router'
 import IProduct from '../../Interfaces/ProductInterface'
 import PhotoViewr from '../../Components/PhotoViewer/PhotoViewr'
 import { Form, Nav, Table } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 const ProductDetails = (props: RouteComponentProps) => {
     const [items, setItems] = useState<IProduct[]>([])
     const location = useLocation()
@@ -11,6 +12,7 @@ const ProductDetails = (props: RouteComponentProps) => {
     const product = items.find(item => item.id === id)
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get("category")
+    const history = useHistory()
     const request = (url: string, name: string) => {
         fetch(url)
             .then(response => response.json())
@@ -24,7 +26,12 @@ const ProductDetails = (props: RouteComponentProps) => {
     }, [])
 
     return (
-        <div className="w-100" style={{ marginTop: "10rem" }}>
+        <div className="w-100" style={{ marginTop: "6rem" }}>
+            <div className="container mb-3 p-3 p-lg-0">
+                <span>{product?.model}</span>
+                <span style={{cursor:"pointer"}} onClick={()=>history.push(`/category${product?.category}`)}> &lt; {product?.category}</span>
+                <span style={{cursor:"pointer"}} onClick={()=>history.push("/homepage")}> &lt; home</span>
+            </div>
             <div className="container w-100">
                 <div className="w-100 d-flex">
                     <div className="row w-100">
