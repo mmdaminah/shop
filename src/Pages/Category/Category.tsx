@@ -25,17 +25,30 @@ export const Category = (props: RouteComponentProps) => {
         console.log(data.id)
         setpagination(+data.id*4)
     }
+    const handlePriceButton = (order:string)=>{
+        switch (order) {
+            case "fromCheap":
+                setItems([...items.sort((a,b)=> +a.price - +b.price)])
+                break; 
+            case "fromExpensive":
+                setItems([...items.sort((a,b)=> +b.price - +a.price)])
+                break;
+            case "fromNewest":
+                setItems([...items.sort((a,b)=> +b.id - +a.id)])
+                break;
+        }
+    }
     return (
-        <div style={{ marginTop: "8rem" }}>
+        <div style={{ marginTop: "8rem" }}>{console.log(items)}
             <div className="container p-3 p-lg-0">
                 <span>{name}</span>
                 <span> &lt; home</span>
             </div>
             <div className="container my-3">
                 <span>مرتب سازی به صورت:</span>
-                <Button className="mx-2" variant="outline-secondary">ارزانترین</Button>
-                <Button className="mx-2" variant="outline-secondary">گرانترین</Button>
-                <Button className="mx-2" variant="outline-secondary">جدیدترین</Button>
+                <Button onClick={()=>handlePriceButton("fromCheap")} className="mx-2" variant="outline-secondary">ارزانترین</Button>
+                <Button onClick={()=>handlePriceButton("fromExpensive")} className="mx-2" variant="outline-secondary">گرانترین</Button>
+                <Button onClick={()=>handlePriceButton("fromNewest")} className="mx-2" variant="outline-secondary">جدیدترین</Button>
             </div>
             <div className="container d-flex my-5">
                 <div className="mt-5">
