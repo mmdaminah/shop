@@ -2,23 +2,35 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router'
+import { useDispatch } from 'react-redux'
 interface IUser {
     email: string;
     password: string;
 }
 export const Login = (props: RouteComponentProps) => {
-    const [user, setUser] = useState<IUser>({email:"",password:""})
+    const dispatch = useDispatch()
+    const [user, setUser] = useState<IUser>({ email: "", password: "" })
     const handleChange = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement
         setUser({ ...user, [data.name]: data.value })
     }
-    const handleLogin = (event:any)=>{
+    const handleLogin = (event: any) => {
         event.preventDefault()
-        axios.post('/login',{
-            email:user.email,
-            password:user.password
+        axios.post('/login', {
+            email: user.email,
+            password: user.password
         })
-        .catch(err => console.log(err))
+            .then((res) => {
+                dispatch({
+                    type: "userLogin", payload: {
+                        isLogin: true,
+                        accessToken: res.data.accessToken,
+                        refreshToken: res.data.refreshToken,
+                        role: ""
+                    }
+                })
+            })
+            .catch(err => console.log(err))
     }
     return (
         <div className="w-100 h-100" style={{ marginTop: "6rem" }}>

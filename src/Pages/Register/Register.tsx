@@ -2,11 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router'
+import { useHistory } from 'react-router'
 interface IUser {
     email: string;
     password: string;
 }
 export const Register = (props: RouteComponentProps) => {
+    const history = useHistory()
     const [user, setUser] = useState<IUser>({email:"",password:""})
     const handleChange = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement
@@ -18,6 +20,7 @@ export const Register = (props: RouteComponentProps) => {
             email:user.email,
             password:user.password
         })
+        .then(()=>history.push("/login"))
         .catch(err => console.log(err))
     }
     return (
