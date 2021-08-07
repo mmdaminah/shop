@@ -2,7 +2,14 @@ const express = require("express");
 const app = express();
 const fs = require('fs')
 const port = process.env.PORT || 5000;
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const users = [];
+myPlaintextPassword = "1234"
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+    users.push({email:"en.mmdamin@gmail.com",password:hash})
+});
 //multer middleware
 const multer  = require('multer')
 const filteStorageEngine = multer.diskStorage({
@@ -62,6 +69,21 @@ app.post("/editmobile:id",upload.single('image'),(req,res)=>{
     const id = req.params.id
     phones.phones.products = phones.phones.products.filter((item)=> item.id !== id)
     phones.phones.products.push(req.body)
+    res.status(200).send("successed")
+})
+app.post("/register",(req, res)=>{
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        users.push({email:req.body.email,password:hash})
+    });
+    res.status(200).send("successed")
+})
+app.post("/login",(req,res)=>{
+    const body = req.body
+    const user = users.find(item => item.email === body.email)
+    bcrypt.compare(body.password, user.password, function(err, result) {
+        console.log(result)
+    });
     res.status(200).send("successed")
 })
 //files share
