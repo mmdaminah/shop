@@ -161,6 +161,11 @@ const MyNavbar = () => {
                     <Nav.Item>
                         <Nav.Link eventKey="link-2">لپ تاپ</Nav.Link>
                     </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-2"
+                            onClick={()=>dispatch({type:"logout"})}
+                        >logout</Nav.Link>
+                    </Nav.Item>
                 </Nav>
             </div>
         </Navbar>

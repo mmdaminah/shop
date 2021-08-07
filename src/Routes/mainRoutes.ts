@@ -8,11 +8,11 @@ const CartPage = React.lazy(()=>import("../Pages/CartPage/CartPage"))
 const Register = React.lazy(()=>import("../Pages/Register/Register"))
 const routes = [
     {path:'/homepage',exact:true,Component:HomePage,loginRequired:false},
-    {path:'/login',exact:true,Component:Login,loginRequired:true},
-    {path:'/register',exact:true,Component:Register,loginRequired:true},
+    {path:'/login',exact:true,Component:Login,loginRequired:false},
+    {path:'/register',exact:true,Component:Register,loginRequired:false},
     {path:'/dashboard',exact:false,Component:Dashboard,loginRequired:true},
     {path:'/category:name',exact:false,Component:Category,loginRequired:false},
     {path:'/productdetails:id',exact:false,Component:ProductDetails,loginRequired:false},
-    {path:'/cart',exact:true,Component:CartPage,loginRequired:true},
+    {path:'/cart',exact:true,Component:CartPage,loginRequired:false},
 ]
 export default routes;

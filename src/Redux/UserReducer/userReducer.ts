@@ -10,6 +10,10 @@ const UserReducer = (state = initialState,action:any)=>{
             return {
                 ...action.payload
             }
+        case "logout":
+            return {
+                ...initialState,isLogin:false
+            }
         default:
             return state
     }
