@@ -5,6 +5,8 @@ import IProduct from '../../Interfaces/ProductInterface'
 import PhotoViewr from '../../Components/PhotoViewer/PhotoViewr'
 import { Form, Nav, Table } from 'react-bootstrap'
 import { useHistory } from 'react-router'
+import { MdShoppingCart } from "react-icons/md";
+import './ProductDetails.style.css'
 const ProductDetails = (props: RouteComponentProps) => {
     const [items, setItems] = useState<IProduct[]>([])
     const location = useLocation()
@@ -26,14 +28,14 @@ const ProductDetails = (props: RouteComponentProps) => {
     }, [])
 
     return (
-        <div className="w-100" style={{ marginTop: "6rem" }}>
-            <div className="container mb-3 p-3 p-lg-0">
+        <div className="w-100" style={{ marginTop: "4rem",backgroundColor:"#fbfbfb" }}>
+            <div className="container p-3">
                 <span>{product?.model}</span>
                 <span style={{cursor:"pointer"}} onClick={()=>history.push(`/category${product?.category}`)}> &lt; {product?.category}</span>
                 <span style={{cursor:"pointer"}} onClick={()=>history.push("/homepage")}> &lt; home</span>
             </div>
             <div className="container w-100">
-                <div className="w-100 d-flex">
+                <div className="w-100 d-flex bg-white p-3 card-container">
                     <div className="row w-100">
                         <div className="col-5">
                             <PhotoViewr />
@@ -41,15 +43,10 @@ const ProductDetails = (props: RouteComponentProps) => {
                         <div className="col-3">
                             <div>
                                 <h1>{product?.model}</h1>
-                                <h4>مشخصات</h4>
-                                <div>پردازنده:{product?.specifications?.cpu}</div>
-                                <div>مقدار رم:{product?.specifications?.ram}</div>
-                                <div>حافظه داخلی:{product?.specifications?.rom}</div>
-                                <div>صفحه نمایش:{product?.specifications?.display}</div>
                             </div>
                         </div>
                         <div className="col-4">
-                            <div className="bg-light text-center rounded">
+                            <div className="bg-light text-center rounded w-100 h-100">
                                 <h4 className="py-4">فروشنده:ممدکامپیوتر</h4>
                                 <hr />
                                 <select className="my-2" name="" id="">
@@ -60,13 +57,17 @@ const ProductDetails = (props: RouteComponentProps) => {
                                 <h5>موجود در انبار</h5>
                                 <hr />
                                 <h4 className="my-2">{product?.price} تومان</h4>
-                                <button className="btn btn-danger my-3 ">افزودن به سبد خرید</button>
+                                <button 
+                                style={{backgroundColor:"#3bc9a7"}}
+                                className="btn text-white w-100 my-3 p-3">
+                                <MdShoppingCart/><span>افزودن به سبد خرید</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="w-100">
-                    <Nav variant="tabs" defaultActiveKey="/home">
+                    <Nav variant="tabs" className="my-2 p-2 card-container" defaultActiveKey="/home">
                         <Nav.Item>
                             <Nav.Link href="#specs">مشخصات</Nav.Link>
                         </Nav.Item>
@@ -77,7 +78,7 @@ const ProductDetails = (props: RouteComponentProps) => {
                             <Nav.Link href="#addComments">افزودن نظر</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    <div className="w-100" id="specs">
+                    <div className="w-100 my-2 p-2 card-container" id="specs">
                         <h3>مشخصات</h3>
                         <Table className="w-50 mx-auto text-center" striped bordered hover>
                             <tbody>
@@ -99,9 +100,8 @@ const ProductDetails = (props: RouteComponentProps) => {
                                 </tr>
                             </tbody>
                         </Table>
-                        <hr />
                     </div>
-                    <div id="comments">
+                    <div id="comments" className="my-2 p-2 card-container">
                         <h3>دیدگاه کاربران</h3>
                         <hr />
                         <div className="bg-light">
@@ -117,7 +117,7 @@ const ProductDetails = (props: RouteComponentProps) => {
                             </p>
                         </div>
                     </div>
-                    <div id="addComments w-100">
+                    <div id="addComments" className="my-2 p-2 w-100 card-container">
                         <h3>افزودن دیدگاه</h3>
 
                         <hr />

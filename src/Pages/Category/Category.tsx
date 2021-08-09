@@ -19,7 +19,7 @@ export const Category = (props: RouteComponentProps) => {
     }
     useEffect(() => {
         request();
-    }, [props.location.pathname])
+    }, [name])
     const  handlePaginationClick = (event:React.MouseEvent)=>{
         const data = event.target as HTMLElement
         console.log(data.id)
@@ -39,7 +39,7 @@ export const Category = (props: RouteComponentProps) => {
         }
     }
     return (
-        <div style={{ marginTop: "8rem" }}>{console.log(items)}
+        <div style={{ marginTop: "8rem" }}>
             <div className="container p-3 p-lg-0">
                 <span>{name}</span>
                 <span style={{cursor:"pointer"}} onClick={()=>history.push("/homepage")}> &lt; home</span>

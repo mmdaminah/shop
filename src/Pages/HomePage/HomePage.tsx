@@ -5,7 +5,7 @@ import ProductSlider from '../../Components/ProductSlider/ProductSlider'
 import CategoryCard from '../../Components/CategoryCard/CategoryCard'
 export const HomePage = (props: RouteComponentProps) => {
     return (
-        <div className="w-100" style={{marginTop:"10rem"}}>
+        <div className="w-100" style={{marginTop:"5rem",backgroundColor:"#fbfbfb"}}>
             <div className="d-flex w-100 container">
                 <Carousel />
                 <div className="w-50">

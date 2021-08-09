@@ -23,7 +23,11 @@ const ProductSlider = (props: any) => {
     }
     useEffect(() => {
         request();
+        window.addEventListener("resize",()=>{
+            setWindowWith(window.innerWidth)
+        })
     }, [])
+    const [windowWidth,setWindowWith] = useState(window.innerWidth)
     return (
         <div className={`d-flex flex-column my-5 ${props.background}`}>
             <div className="container">
@@ -31,15 +35,15 @@ const ProductSlider = (props: any) => {
                     <h1>{props.title}</h1>
                 </div>
                 <Swiper
-                    slidesPerView={window.innerWidth < 500 ? 3 : 4}
-                    spaceBetween={window.innerWidth < 500 ? 5 : 30}
-                    slidesPerGroup={window.innerWidth < 500 ? 3 : 4}
+                    slidesPerView={windowWidth < 500 ? 1.5 : 4}
+                    spaceBetween={windowWidth < 500 ? 5 : 30}
+                    slidesPerGroup={windowWidth < 500 ? 1 : 4}
                     loop={true}
                     loopFillGroupWithBlank={true}
-                    pagination={window.innerWidth < 500 ? false : {
+                    pagination={windowWidth < 500 ? false : {
                         "clickable": true
                     }}
-                    navigation={true}
+                    navigation={windowWidth < 500 ? false : true}
                     className="mySwiper mb-5 bg-white p-lg-5"
                     style={{ borderRadius: "10px" }}
                 >
