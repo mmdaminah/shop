@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { MdShoppingCart, MdAccountCircle, MdFavorite, MdSearch } from "react-icons/md";
+import { MdShoppingCart, MdAccountCircle, MdHome, MdList, MdSearch } from "react-icons/md";
 import { Navbar, Nav, Form, FormControl, Dropdown, Badge } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
@@ -15,6 +15,7 @@ const MyNavbar = () => {
     const [searchItems, setSearchItems] = useState<IProduct[]>()
     const cartItems = useSelector<ICart, ICartProducts[]>(state => state.cart.cartProducts)
     const allProducts = useSelector<IAllProducts, IProduct[]>(state => state.allProducts.allProducts)
+    const [windowWidth, setWindowWith] = useState(window.innerWidth)
     const handleSearch = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement;
         console.log(data.value)
@@ -29,6 +30,9 @@ const MyNavbar = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch({ type: "search", payload: "" })
+        window.addEventListener("resize", () => {
+            setWindowWith(window.innerWidth)
+        })
     }, [])
     const handleSearchClick = (id: string, category: string) => {
         setInputSearch("")
@@ -68,7 +72,9 @@ const MyNavbar = () => {
         <Navbar fixed="top" bg="white" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
                 <Navbar.Brand className="" onClick={() => history.push("/homepage")} href="#">ممدشاپ</Navbar.Brand>
-                <Form className="d-flex mx-auto" style={{width:"35%"}}>
+                {windowWidth < 500 &&  <div><div>با ما تماس بگیرید</div><div style={{direction:"ltr"}}>09371522920</div></div>}
+                { windowWidth > 500 &&
+                <Form className="d-flex mx-auto" style={{ width: "35%" }}>
                     <div className="w-100" style={{ position: "relative" }}>
                         <div className="w-100 mx-auto" style={{ position: "relative" }}>
                             <FormControl
@@ -101,9 +107,10 @@ const MyNavbar = () => {
                             }
                         </div>
                     </div>
-                </Form>
-                <div className="d-flex flex-row-reverse" style={{width:"22%"}}>
-                    <Nav.Link style={{ width:"50px",height:"50px",position: "relative" }}>
+                </Form> }
+                { windowWidth > 500 &&
+                <div className="d-flex flex-row-reverse" style={{ width: "22%" }}>
+                    <Nav.Link style={{ width: "50px", height: "50px", position: "relative" }}>
                         <div style={{ position: "relative" }}
                             onClick={() => setCartShow(!cartShow)}
                         >
@@ -123,7 +130,7 @@ const MyNavbar = () => {
                                     borderRadius: "50%"
                                 }} />
                         </div>
-                        {cartShow && <div className="bg-light" style={{ position: "absolute",left:"10%", height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 100 : 0}px`, overflowY: "scroll" }}>
+                        {cartShow && <div className="bg-light" style={{ position: "absolute", left: "10%", height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 100 : 0}px`, overflowY: "scroll" }}>
                             {
                                 cartItems.map((item) => {
                                     return (
@@ -150,22 +157,62 @@ const MyNavbar = () => {
                         </div>}
                     </Nav.Link>
                     <Nav.Link href="#link" >
-                        <MdAccountCircle 
-                        onMouseEnter={() => setUserIconStyle("#06a0a7")}
-                        onMouseLeave={() => setUserIconStyle("#b8e3e6")}
-                        style={{
-                            width: "40px",
-                            height: "40px",
-                            padding: "5px",
-                            backgroundColor: `${userIconStyle}`,
-                            borderRadius: "50%"
-                        }}
+                        <MdAccountCircle
+                            onMouseEnter={() => setUserIconStyle("#06a0a7")}
+                            onMouseLeave={() => setUserIconStyle("#b8e3e6")}
+                            style={{
+                                width: "40px",
+                                height: "40px",
+                                padding: "5px",
+                                backgroundColor: `${userIconStyle}`,
+                                borderRadius: "50%"
+                            }}
                         />
                     </Nav.Link>
-                </div>
+                </div>}
             </div>
             <div className="w-100 container">
-                {navbarShow && window.innerWidth > 500 && <Nav
+                {
+                    windowWidth < 500 &&
+                    <div
+                        className="w-100 bg-white p-2 d-flex justify-content-around"
+                        style={{ position: "fixed", left: "0", bottom: "0" }}>
+                        <div className="d-flex flex-column text-center">
+                            <MdHome
+                                onClick={()=>history.push("/homepage")}
+                                style={{ width: "40px", height: "40px" }}
+                            />
+                            <span style={{fontSize:"smaller"}}>خانه</span>
+                        </div>
+                        <div className="d-flex flex-column text-center">
+                            <MdList
+                                style={{ width: "40px", height: "40px" }}
+                            />
+                            <span style={{fontSize:"smaller"}}>دسته بندی</span>
+                        </div>
+                        <div className="d-flex flex-column text-center">
+                            <MdShoppingCart
+                                onClick={()=>history.push("/cart")}
+                                style={{ width: "40px", height: "40px" }}
+                            />
+                            <span style={{fontSize:"smaller"}}>سبد خرید</span>
+                        </div>
+                        <div className="d-flex flex-column text-center">
+                            <MdSearch
+                                style={{ width: "40px", height: "40px" }}
+                            />
+                            <span style={{fontSize:"smaller"}}>جستجو</span>
+                        </div>
+                        <div className="d-flex flex-column text-center">
+                            <MdAccountCircle
+                                style={{ width: "40px", height: "40px" }}
+                            />
+                            <span style={{fontSize:"smaller"}}>حساب</span>
+                        </div>
+
+                    </div>
+                }
+                {navbarShow && windowWidth > 500 && <Nav
                     className={`d-flex flex-row w-100`}
                     activeKey="/home"
                 >

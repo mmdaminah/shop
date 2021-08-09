@@ -1,8 +1,15 @@
+import { useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
 //mobile:https://static.giga.de/wp-content/uploads/2021/02/samsung-galaxy-s21-und-plus-ultra-google-pixel-4a-4xl-xiaomi-redmi-note-9t-android-smartphones-q_giga-P1488189.jpg
 const MyCarousel = () => {
+    const [windowWidth,setWindowWith] = useState(window.innerWidth)
+    useEffect(() => {
+        window.addEventListener("resize",()=>{
+            setWindowWith(window.innerWidth)
+        })
+    }, [])
     return (
-        <div className="d-flex w-100 mt-2">
+        <div className="d-flex p-1" style={{width:`${windowWidth < 992 ? 100: 65}%`}}>
             <Carousel className="w-100 rounded">
                 <Carousel.Item>
                     <img
