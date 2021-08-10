@@ -29,14 +29,14 @@ const ProductSlider = (props: any) => {
     }, [])
     const [windowWidth,setWindowWith] = useState(window.innerWidth)
     return (
-        <div className={`d-flex flex-column my-5 ${props.background}`}>
+        <div className={`d-flex flex-column my-5`} style={{background:props.color}}>
             <div className="container">
-                <div>
-                    <h1>{props.title}</h1>
+                <div className="my-4">
+                    <h1 className="text-white">{props.title}</h1>
                 </div>
                 <Swiper
                     slidesPerView={windowWidth < 500 ? 1.5 : 4}
-                    spaceBetween={windowWidth < 500 ? 5 : 30}
+                    spaceBetween={windowWidth < 500 ? 5 : 20}
                     slidesPerGroup={windowWidth < 500 ? 1 : 4}
                     loop={true}
                     loopFillGroupWithBlank={true}

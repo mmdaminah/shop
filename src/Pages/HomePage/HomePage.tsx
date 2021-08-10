@@ -7,13 +7,15 @@ import promoPic1 from '../../Assets/PromotionPic1.jpg'
 import promoPic2 from '../../Assets/PromotionPic2.jpg'
 import promoPic3 from '../../Assets/PromotionPic3.jpg'
 import promoPic4 from '../../Assets/PromotionPic4.jpg'
+import promoPic5 from '../../Assets/PromotionPic5.jpg'
+import promoPic6 from '../../Assets/PromotionPic6.jpg'
 export const HomePage = (props: RouteComponentProps) => {
     const [windowWidth,setWindowWith] = useState(window.innerWidth)
     useEffect(() => {
         window.addEventListener("resize",()=>{
             setWindowWith(window.innerWidth)
         })
-    }, [])
+    }, [])//EF394E
     return (
         <div className="w-100" style={{marginTop:`${windowWidth < 992 ? "3rem": "5rem"}`,backgroundColor:"#fbfbfb"}}>
             <div className="d-flex flex-lg-row flex-column w-100 container">
@@ -27,10 +29,7 @@ export const HomePage = (props: RouteComponentProps) => {
                     </div>
                 </div>
             </div>
-            <ProductSlider title={"گوشی"} background={"bg-danger"}  url="/mobile" />
-            <ProductSlider title={"تبلت"} background={"bg-success"}  url="/tablet" />
-            <ProductSlider title={"لپ تاپ"} background={"bg-primary"}  url="/laptop" />
-            <CategoryCard />
+            <ProductSlider title={"گوشی"} background={"bg-danger"} color={"#EF394E"}  url="/mobile" />
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3 col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic1} alt="" /></div>
@@ -39,6 +38,15 @@ export const HomePage = (props: RouteComponentProps) => {
                     <div className="col-lg-3 col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic4} alt="" /></div>
                 </div>
             </div>
+            <ProductSlider title={"تبلت"} background={"bg-success"} color={"#6bb927"}  url="/tablet" />
+            <div className="container">
+                <div className="row">
+                    <div className="col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic5} alt="" /></div>
+                    <div className="col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic6} alt="" /></div>
+                </div>
+            </div>
+            <ProductSlider title={"لپ تاپ"} background={"bg-primary"} color={"#019ca7"}  url="/laptop" />
+            <CategoryCard />
         </div>
     )
 }

@@ -7,8 +7,8 @@ import { useHistory } from "react-router";
 const CategoryCard = () => {
     const history = useHistory()
     return (
-        <div className="text-center w-100 my-3" style={{backgroundColor:"#d4edef"}}>
-            <div className="container d-flex flex-lg-row flex-column justify-content-center w-100 p-5">
+        <div className="text-center w-100 my-3 p-4" >
+            <div className="container d-flex flex-lg-row flex-column justify-content-center w-100 p-5" style={{backgroundColor:"#d4edef",boxShadow:"rgb(0 0 0 / 10%) 4px 8px 8px 5px",borderRadius:"8px"}}>
                 <div onClick={() => history.push("/categorymobile")} className="col-lg-3 col-12 bg-white rounded category-card-custom text-white">
                     <img style={{ width: "100px", height: "150px" }} src={SmartPhone} alt="" />
                     <h1>گوشی</h1>

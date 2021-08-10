@@ -2,8 +2,8 @@
     width: 200px;
 }
 .product-card-container img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 .product-card-container:hover {
     background-color: #f8f8f8;

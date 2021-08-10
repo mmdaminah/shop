@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import { Spinner } from 'react-bootstrap';
 import PrivateRotue from './Routes/PrivateRotue';
 function App() {
-  document.title = "Mamad Shop"
+  document.title = "فروشگاه آل دیجیتال"
   const cart = useSelector(state => state)
   return (
     <Router>

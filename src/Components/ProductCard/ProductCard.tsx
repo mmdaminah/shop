@@ -9,7 +9,7 @@ const ProductCard = ({image,model,category,price,btnColor="bg-success"}:any) => 
     }
     return (
         <div className="product-card-container w-100" >
-            <img className="w-100" src={image} alt="" />
+            <div className="text-center"><img className="" src={image} alt="" /></div>
             <div className="text-center"><h4>{model}</h4></div>
             <div className="text-center">{category}</div>
             <div className="text-center" style={{color:"#3Bc9a7"}}>{price}<span style={{color:"#3Bc9a7"}}>تومان</span></div>

@@ -71,7 +71,7 @@ const MyNavbar = () => {
     return (
         <Navbar fixed="top" bg="white" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
-                <Navbar.Brand className="" onClick={() => history.push("/homepage")} href="#">ممدشاپ</Navbar.Brand>
+                <Navbar.Brand className="" onClick={() => history.push("/homepage")} href="#">آل دیجیتال</Navbar.Brand>
                 {windowWidth < 500 &&  <div><div>با ما تماس بگیرید</div><div style={{direction:"ltr"}}>09371522920</div></div>}
                 { windowWidth > 500 &&
                 <Form className="d-flex mx-auto" style={{ width: "35%" }}>
@@ -222,7 +222,7 @@ const MyNavbar = () => {
                         >دسته بندی
                             {
                                 categoryShow && <div className="bg-light w-50"
-                                    style={{ position: "absolute", border: "4px solid black" }}
+                                    style={{ position: "absolute", border: "1px solid #aecacc" }}
                                 >
                                     <div className="container"
                                         onMouseLeave={() => setCategoryShow(false)}
@@ -263,13 +263,13 @@ const MyNavbar = () => {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-1">گوشی</Nav.Link>
+                        <Nav.Link onClick={()=>history.push("/categorymobile")}>گوشی</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-2">تبلت</Nav.Link>
+                        <Nav.Link onClick={()=>history.push("/categorytablet")}>تبلت</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-2">لپ تاپ</Nav.Link>
+                        <Nav.Link onClick={()=>history.push("/categorylaptop")}>لپ تاپ</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="link-2"
