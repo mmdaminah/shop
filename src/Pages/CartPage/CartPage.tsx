@@ -1,72 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import IProduct from '../../Interfaces/ProductInterface'
-import ICart from '../../Interfaces/CartInterface'
-import { Button } from 'react-bootstrap'
-import { MdDelete } from "react-icons/md";
-import ICartProducts from '../../Interfaces/CartProduct'
+import { MdShoppingCart, MdLocalShipping, MdPayment, MdDone } from "react-icons/md";
+import routes from "../../Routes/cartRoutes"
+import { Route } from 'react-router-dom'
 const CartPage = (props: RouteComponentProps) => {
-    const cartItems = useSelector<ICart, ICartProducts[]>(state => state.cart.cartProducts)
+    const [windowWidth, setWindowWith] = useState(window.innerWidth)
+    const [state,setState] = useState("state1")
+    useEffect(() => {
+        window.addEventListener("resize", () => {
+            setWindowWith(window.innerWidth)
+        })
+    }, [])
+    // dispatch({type:"resetCart"})
     return (
-        <div className="w-100" style={{ marginTop: "8rem" }}>
-            <div className="container w-100 d-flex">
-                <div className="w-75">
-                    {
-                        cartItems.map((item) => {
-                            return (
-                                <div className="row bg-light p-2 m-4 rounded">
-                                    <div className="col-4 text-center">
-                                        <img style={{ width: "200px", height: "200px" }} src={item.image} alt="" />
-                                    </div>
-                                    <div className="col-5 d-flex flex-column justify-content-around">
-                                        <div>{item.model}</div>
-                                        <div>
-                                            <Button variant="success" size="sm">+</Button>
-                                            <span className="mx-2">{item.count}</span>
-                                            <Button variant="danger" size="sm">-</Button>
-                                        </div>
-                                    </div>
-                                    <div className="col-3 py-4 d-flex flex-column justify-content-between">
-                                        <div className="d-flex flex-row-reverse">
-                                            <MdDelete style={{ width: "50px", height: "50px", color: "red" }} />
-                                        </div>
-                                        <div>
-                                            <div>
-                                                <span>قیمت واحد:</span>
-                                                <strong><span className="text-success">{item.price}</span></strong>
-                                            </div>
-                                            <div>
-                                                <span>قیمت کامل:</span>
-                                                <strong><span className="text-success">{item.price}</span></strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+        <div className="w-100" style={{ marginTop: `${windowWidth < 992 ? "3rem" : "5rem"}` }}>
+            <div className="d-flex justify-content-around container w-100">
+                <div className="text-center">{console.log(state)}
+                    <MdShoppingCart style={{ width: "50px", height: "50px", color: "#019CA7" }} />
+                    <div>تایید سبد خرید</div>
                 </div>
-                <div className="w-25 m-4">
-                    <div className="bg-light rounded p-3">
-                        <div>
-                            <h5>خلاصه فاکتور</h5>
-                            <hr />
-                        </div>
-                        <div className="my-3">
-                            <span>مجموع سبد خرید:</span>
-                            <strong><span className="text-success">2133123</span></strong>
-                        </div>
-                        <div className="my-3">
-                            <span>مجموع کل:</span>
-                            <strong><span className="text-success">2133123</span></strong>
-                        </div>
-                        <div className="text-center">
-                            <button className="btn btn-success w-75">تایید</button>
-                        </div>
-                    </div>
+                <div style={{width: "60px", height: "2px", margin:"auto 0", backgroundColor: "#019CA7" }}></div>
+                <div className="text-center">
+                    <MdLocalShipping style={{ width: "50px", height: "50px", color: "#019CA7" }} />
+                    <div>انتخاب آدرس و شیوه ارسال</div>
+                </div>
+                <div  style={{width: "60px", height: "2px", margin:"auto 0", backgroundColor: "#019CA7" }}></div>
+                <div className="text-center">
+                    <MdPayment style={{ width: "50px", height: "50px", color: "#019CA7" }} />
+                    <div>انتخاب روش پرداخت</div>
+                </div>
+                <div style={{width: "60px", height: "2px", margin:"auto 0", backgroundColor: "#019CA7" }}></div>
+                <div className="text-center">
+                    <MdDone style={{ width: "50px", height: "50px", color: "#019CA7" }} />
+                    <div>اتمام سفارش</div>
                 </div>
             </div>
+            {
+                routes.map((item,index) => {
+                    return (
+                        <Route
+                            key={index}
+                            path={"/cart" + item.path}
+                            exact={item.exact}
+                            render={(props) => <item.Component {...props} />}
+                        />
+                    )
+                })
+            }
         </div>
     )
 }

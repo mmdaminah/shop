@@ -55,6 +55,7 @@ const ProductSlider = (props: any) => {
                                         onClick={() => history.push(`/productdetails${item.id}?category=${item.category}`)}
                                     >
                                         <ProductCard
+                                            id={item.id}
                                             image={item.image}
                                             model={item.model}
                                             category={item.category}
