@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router'
 import { useDispatch } from 'react-redux'
+import { MdLockOpen } from "react-icons/md";
 interface IUser {
     email: string;
     password: string;
@@ -33,21 +34,34 @@ export const Login = (props: RouteComponentProps) => {
             .catch(err => console.log(err))
     }
     return (
-        <div className="w-100 h-100" style={{ marginTop: "6rem" }}>
+        <div className="w-100 bg-light h-100" style={{ marginTop: "6rem" }}>
             <div className="container w-100 h-75 d-flex justify-content-center align-items-center">
-                <Form className="bg-light p-5 rounded">
+                <Form className="bg-white p-5 rounded"
+                style={{ boxShadow: "0 5px 8px -3px rgb(0 0 0 / 10%)", borderRadius: "8px" }}
+                >
+                    <div className="text-center">
+                        <MdLockOpen
+                            className="p-3"
+                            style={{ width: "100px", height: "100px", backgroundColor: "#fff9f9", color: "#e05c5c", borderRadius: "50%" }} />
+                    </div>
                     <div className="text-center"><h1>Login</h1></div>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>ایمیل</Form.Label>
-                        <Form.Control onChange={handleChange} name="email" type="email" placeholder="examle@gmail.com" />
+                        <Form.Control 
+                        style={{ borderRadius: "22px", border: "none",backgroundColor:"#e8f0fe" }}
+                        onChange={handleChange} name="email" type="email" placeholder="آدرس ایمیل" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>رمز عبور</Form.Label>
-                        <Form.Control onChange={handleChange} name="password" type="password" placeholder="Password" />
+                        <Form.Control 
+                        style={{ borderRadius: "22px", border: "none",backgroundColor:"#e8f0fe" }}
+                        onChange={handleChange} name="password" type="password" placeholder="کلمه عبور" />
                     </Form.Group>
-                    <div><a style={{ textDecoration: "none" }} href="">فراموشی رمز عبور</a></div>
-                    <Button onClick={handleLogin} variant="primary" type="submit">
-                        ورود
+                    <Button 
+                        style={{backgroundColor:"#3bc9a7"}}
+                        className="w-100 mt-3" 
+                        onClick={handleLogin} variant="primary" type="submit">
+                            ورود به حساب
                     </Button>
                 </Form>
             </div>
