@@ -31,13 +31,13 @@ const CartView = (props: RouteComponentProps) => {
     }, [])
     // dispatch({type:"resetCart"})
     return (
-        <div className="w-100" style={{ marginTop: `${windowWidth < 992 ? "3rem" : "5rem"}` }}>
-            <div className="container w-100 d-flex">
                 <div className={`${windowWidth < 500 ? "w-100" : "w-75"}`}>
                     {
                         cartItems.map((item) => {
                             return (
-                                <div className="row bg-light p-2 m-4 rounded">
+                                <div key={Math.random()*3213} className="row bg-white p-2 m-4 rounded"
+                                style={{boxShadow:"0 5px 8px -3px rgb(0 0 0 / 10%)",borderRadius:"8px"}}
+                                >
                                     <div className={`${windowWidth < 500 ? "col12" : "col-4"} 
                                     text-center`}>
                                         <img className="w-100" style={{ maxWidth: "150px" }} src={item.image} alt="" />
@@ -77,63 +77,23 @@ const CartView = (props: RouteComponentProps) => {
                             )
                         })
                     }
-                </div>
-                {
-                    windowWidth > 500 &&
-                    <div className="w-25 m-4">
-                        <div className="bg-light rounded p-3">
-                            <div>
-                                <h5>خلاصه فاکتور</h5>
-                                <hr />
-                            </div>
-                            <div className="my-3">
-                                <span>مجموع سبد خرید:</span>
-                                <strong><span className="text-success">
-                                    {
-                                        cartItems.reduce((accumulator: number, current: ICartProducts) => {
-                                            return accumulator + (+current.price * current.count);
-                                        }, 0)
-                                    }
-                                </span></strong>
-                            </div>
-                            <div className="my-3">
-                                <span>مجموع کل:</span>
-                                <strong>
-                                    <span className="text-success">
-                                        {
-                                            cartItems.reduce((accumulator: number, current: ICartProducts) => {
-                                                return accumulator + (+current.price * current.count);
-                                            }, 0)
-                                        }
-                                    </span>
-                                </strong>
-                            </div>
+                    <Modal show={show} onHide={handleClose} style={{ position: "fixed", top: "25%" }}>
+                        <Modal.Body className="p-5">
                             <div className="text-center">
-                                <button 
-                                onClick={()=>history.push("/cart/verifyaddress")}
-                                className="btn btn-success w-75">تایید</button>
+                                <MdDelete className="p-4" style={{ width: "130px", height: "130px", color: "red", backgroundColor: "#FFEFEF", borderRadius: "50%" }} />
+                                <h4 className="my-3">آیا از حذف این محصول اطمینان دارید؟</h4>
                             </div>
-                        </div>
-                    </div>
-                }
-            </div>
-            <Modal show={show} onHide={handleClose} style={{ position: "fixed", top: "25%" }}>
-                <Modal.Body className="p-5">
-                    <div className="text-center">
-                        <MdDelete className="p-4" style={{ width: "130px", height: "130px", color: "red", backgroundColor: "#FFEFEF", borderRadius: "50%" }} />
-                        <h4 className="my-3">آیا از حذف این محصول اطمینان دارید؟</h4>
-                    </div>
-                    <div className="text-center my-3">
-                        <Button className="mx-2" variant="outline-secondary" onClick={handleClose}>
-                            لغو
-                        </Button>
-                        <Button className="mx-2" variant="success" onClick={handleRemove}>
-                            بله حذف کن
-                        </Button>
-                    </div>
-                </Modal.Body>
-            </Modal>
-        </div>
+                            <div className="text-center my-3">
+                                <Button className="mx-2" variant="outline-secondary" onClick={handleClose}>
+                                    لغو
+                                </Button>
+                                <Button className="mx-2" variant="success" onClick={handleRemove}>
+                                    بله حذف کن
+                                </Button>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+                </div>
     )
 }
 export default CartView;
