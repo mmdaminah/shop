@@ -82,11 +82,22 @@ function generateAccessToken(email) {
     return jwt.sign(email, TOKEN_SECRET, { expiresIn: "10s" });
 }
 app.post("/register", (req, res) => {
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        // Store hash in your password DB.
-        users.push({ email: req.body.email, password: hash });
-    });
-    res.status(200).send("successed");
+    const body = req.body;
+    const user = users.find((item) => item.email === body.email);
+    if(user){
+        bcrypt.compare(body.password, user.password, function (err, result) {
+            if(result){
+                res.status(200).send("user already exists")
+            }
+        })
+    }
+    else{
+        bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+            // Store hash in your password DB.
+            users.push({ email: req.body.email, password: hash });
+        });
+        res.status(200).send("successed");
+    }
 });
 
 app.post("/login", (req, res) => {
@@ -94,7 +105,7 @@ app.post("/login", (req, res) => {
     const user = users.find((item) => item.email === body.email);
     bcrypt.compare(body.password, user.password, function (err, result) {
         const token = generateAccessToken({ email: req.body.email });
-        const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, { expiresIn: "10s"})
+        const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, { expiresIn: "300s"})
         res.json({accessToken:token,refreshToken})
         // res.status(200).send("successed");
     });

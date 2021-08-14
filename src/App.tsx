@@ -13,7 +13,7 @@ function App() {
   const cart = useSelector(state => state)
   return (
     <Router>
-      <div className="app">
+      <div className="app bg-light">
         <MyNavbar /><Spinner animation="border" variant="primary" />
         <Suspense fallback={<Spinner animation="border" variant="primary" style={{ width: "300px", height: "300px", position: "absolute", top: "25%", right: "35%" }} />}>
           <Switch>
