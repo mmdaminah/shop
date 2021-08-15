@@ -11,7 +11,7 @@ const orders = []
 myPlaintextPassword = "1234";
 bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
     // Store hash in your password DB.
-    users.push({ email: "en.mmdamin@gmail.com", password: hash });
+    users.push({ firstName:"محمد امین",lastName:"احمدی",phoneNumber:"09371522920",email: "en.mmdamin@gmail.com", password: hash });
 });
 //multer middleware
 const multer = require("multer");
@@ -45,6 +45,12 @@ app.get("/laptop", (req, res) => {
 app.get("/tablet", (req, res) => {
     res.send(tablets.tablets);
 });
+app.get("/userlist",(req,res)=>{
+    res.send(users)
+})
+app.get("/orders",(req,res)=>{
+    res.send(orders)
+})
 //post requests
 app.post("/mobile", upload.single("image"), (req, res) => {
     console.log(req.body);
@@ -95,7 +101,7 @@ app.post("/register", (req, res) => {
     else{
         bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
             // Store hash in your password DB.
-            users.push({ email: req.body.email, password: hash });
+            users.push({ ...body, password: hash });
         });
         res.status(200).send("successed");
     }

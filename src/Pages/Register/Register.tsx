@@ -9,10 +9,11 @@ interface IUser {
     lastName: string;
     email: string;
     password: string;
+    phoneNumber:string
 }
 export const Register = (props: RouteComponentProps) => {
     const history = useHistory()
-    const [user, setUser] = useState<IUser>({ firstName: "", lastName: "", email: "", password: "" })
+    const [user, setUser] = useState<IUser>({ firstName: "", lastName: "", email: "", password: "",phoneNumber:"" })
     const [message, setMessage] = useState("")
     const handleChange = (event: React.ChangeEvent) => {
         const data = event.target as HTMLInputElement
@@ -21,8 +22,7 @@ export const Register = (props: RouteComponentProps) => {
     const handleRegister = (event: any) => {
         event.preventDefault()
         axios.post('/register', {
-            email: user.email,
-            password: user.password
+            ...user
         })
             .then((res) => {
                 if (res.data === "user already exists") {
@@ -90,7 +90,7 @@ export const Register = (props: RouteComponentProps) => {
                             <Form.Control
                             className="bg-light"
                             style={{ borderRadius: "22px", border: "none" }}
-                            onChange={handleChange} name="email" type="email" placeholder="شماره موبایل خود را وارد نمایید" />
+                            onChange={handleChange} name="phoneNumber" type="email" placeholder="شماره موبایل خود را وارد نمایید" />
                         </div>
                         <div className="col-lg-6 col-12 mt-2">
                             <Form.Label>کلمه عبور</Form.Label>
