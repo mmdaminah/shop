@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const users = [];
+const orders = []
 myPlaintextPassword = "1234";
 bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
     // Store hash in your password DB.
@@ -110,6 +111,12 @@ app.post("/login", (req, res) => {
         // res.status(200).send("successed");
     });
 });
+app.post("/order",(req, res) => {
+    const body = req.body;
+    console.log(body)
+    orders.push(body)
+    res.status(200).send("successful")
+})
 //files share
 app.use("/phones", express.static("phones"));
 app.use("/laptops", express.static("laptops"));
