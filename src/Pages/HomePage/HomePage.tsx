@@ -29,7 +29,7 @@ export const HomePage = (props: RouteComponentProps) => {
                     </div>
                 </div>
             </div>
-            <ProductSlider title={"گوشی"} background={"bg-danger"} color={"#EF394E"}  url="/mobile" />
+            <ProductSlider title={"گوشی"} background={"bg-danger"} color={"#EF394E"}  url="/mobile" textColor="text-white" />
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3 col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic1} alt="" /></div>
@@ -38,14 +38,14 @@ export const HomePage = (props: RouteComponentProps) => {
                     <div className="col-lg-3 col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic4} alt="" /></div>
                 </div>
             </div>
-            <ProductSlider title={"تبلت"} background={"bg-success"} color={"#6bb927"}  url="/tablet" />
+            <ProductSlider title={"تبلت"} background={"bg-success"} color={"#6bb927"}  url="/tablet" textColor="text-white" />
             <div className="container">
                 <div className="row">
                     <div className="col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic5} alt="" /></div>
                     <div className="col-6"><img className="w-100" style={{borderRadius:"8px"}} src={promoPic6} alt="" /></div>
                 </div>
             </div>
-            <ProductSlider title={"لپ تاپ"} background={"bg-primary"} color={"#019ca7"}  url="/laptop" />
+            <ProductSlider title={"لپ تاپ"} background={"bg-primary"} color={"#019ca7"}  url="/laptop" textColor="text-white" />
             <CategoryCard />
         </div>
     )

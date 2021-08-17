@@ -1,26 +1,20 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import ICartInformation from '../../../Interfaces/CartUserInterface'
 import { Table } from 'react-bootstrap'
-interface IUser {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    phoneNumber: string
-}
-const UserList = () => {
-    const [users, setUsers] = useState<IUser[]>()
+const OrderList = () => {
+    const [orders,setOrders] = useState([])
     useEffect(() => {
-        axios.get("/userlist")
+        axios.get("/orders")
             .then((res) => {
-                setUsers(res.data)
+                console.log(res.data)
+                setOrders(res.data)
             })
     }, [])
     return (
         <div className="w-100">
-            <div className="container">
-                <h1>لیست کاربران</h1>
-                <Table striped bordered hover>
+            <h1>لیست سفارشات</h1>
+            <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -32,21 +26,15 @@ const UserList = () => {
                     </thead>
                     <tbody>
                         {
-                            users?.map((item,index) => (
-                                <tr key={Math.random()*1000}>
+                            orders?.map((item,index)=>(
+                                <tr>
                                     <td>{index+1}</td>
-                                    <td>{item.firstName}</td>
-                                    <td>{item.lastName}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.phoneNumber}</td>
                                 </tr>
                             ))
                         }
                     </tbody>
                 </Table>
-
-            </div>
         </div>
     )
 }
-export default UserList
+export default OrderList

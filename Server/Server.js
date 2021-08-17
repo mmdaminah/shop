@@ -7,11 +7,17 @@ const port = process.env.PORT || 5000;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const users = [];
-const orders = []
+const orders = [];
 myPlaintextPassword = "1234";
 bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
     // Store hash in your password DB.
-    users.push({ firstName:"محمد امین",lastName:"احمدی",phoneNumber:"09371522920",email: "en.mmdamin@gmail.com", password: hash });
+    users.push({
+        firstName: "محمد امین",
+        lastName: "احمدی",
+        phoneNumber: "09371522920",
+        email: "en.mmdamin@gmail.com",
+        password: hash,
+    });
 });
 //multer middleware
 const multer = require("multer");
@@ -32,7 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 const phones = require("./data/phoneData.js");
 const laptops = require("./data/laptopData.js");
 const tablets = require("./data/tabletData.js");
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 //get requests
@@ -45,12 +50,12 @@ app.get("/laptop", (req, res) => {
 app.get("/tablet", (req, res) => {
     res.send(tablets.tablets);
 });
-app.get("/userlist",(req,res)=>{
-    res.send(users)
-})
-app.get("/orders",(req,res)=>{
-    res.send(orders)
-})
+app.get("/userlist", (req, res) => {
+    res.send(users);
+});
+app.get("/orders", (req, res) => {
+    res.send(orders);
+});
 //post requests
 app.post("/mobile", upload.single("image"), (req, res) => {
     console.log(req.body);
@@ -91,14 +96,13 @@ function generateAccessToken(email) {
 app.post("/register", (req, res) => {
     const body = req.body;
     const user = users.find((item) => item.email === body.email);
-    if(user){
+    if (user) {
         bcrypt.compare(body.password, user.password, function (err, result) {
-            if(result){
-                res.status(200).send("user already exists")
+            if (result) {
+                res.status(200).send("user already exists");
             }
-        })
-    }
-    else{
+        });
+    } else {
         bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
             // Store hash in your password DB.
             users.push({ ...body, password: hash });
@@ -112,17 +116,30 @@ app.post("/login", (req, res) => {
     const user = users.find((item) => item.email === body.email);
     bcrypt.compare(body.password, user.password, function (err, result) {
         const token = generateAccessToken({ email: req.body.email });
-        const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, { expiresIn: "300s"})
-        res.json({accessToken:token,refreshToken})
+        const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, {
+            expiresIn: "300s",
+        });
+        res.json({ accessToken: token, refreshToken });
         // res.status(200).send("successed");
     });
 });
-app.post("/order",(req, res) => {
+app.post("/order", (req, res) => {
     const body = req.body;
-    console.log(body)
-    orders.push(body)
-    res.status(200).send("successful")
-})
+    console.log(body);
+    orders.push(body);
+    res.status(200).send("successful");
+});
+app.post("/comment", (req, res) => {
+    const body = req.body;
+    console.log(body);
+    const {comment, id, category} = body
+    if(category === "mobile"){
+        const item = phones.phones.products.find((product)=>product.id === id)
+        // console.log()
+        item && item.comments.push(comment)
+        res.status(200).send(item);
+    }
+});
 //files share
 app.use("/phones", express.static("phones"));
 app.use("/laptops", express.static("laptops"));

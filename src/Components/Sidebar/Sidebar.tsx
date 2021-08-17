@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MdAddCircleOutline, MdList, MdSupervisorAccount } from "react-icons/md";
+import { MdAddCircleOutline, MdList, MdSupervisorAccount, MdPlaylistAddCheck } from "react-icons/md";
 import { useHistory } from 'react-router';
 const Sidebar = () => {
     const [show, setShow] = useState(false);
@@ -31,6 +31,10 @@ const Sidebar = () => {
                 <div onClick={()=>history.push("/dashboard/userlist")} style={{cursor:"pointer"}}>
                     <MdSupervisorAccount style={{width:"50px",height:"50px"}}/>
                     {show && <span>لیست کاربران</span>}
+                </div>
+                <div onClick={()=>history.push("/dashboard/orderlist")} style={{cursor:"pointer"}}>
+                    <MdPlaylistAddCheck style={{width:"50px",height:"50px"}}/>
+                    {show && <span>سفارشات</span>}
                 </div>
             </div>
         </div>

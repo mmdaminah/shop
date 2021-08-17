@@ -32,7 +32,7 @@ const ProductSlider = (props: any) => {
         <div className={`d-flex flex-column my-5`} style={{background:props.color}}>
             <div className="container">
                 <div className="my-4">
-                    <h1 className="text-white">{props.title}</h1>
+                    <h1 className={props.textColor}>{props.title}</h1>
                 </div>
                 <Swiper
                     slidesPerView={windowWidth < 500 ? 1.5 : 4}

@@ -15,7 +15,7 @@ const PaymentMethod = (props: RouteComponentProps) => {
     const handleClick = ()=>{
         localDispatch({type:"payment",payload:payment})
         axios.post("/order",{
-            body:localState
+            ...localState,...payment
         })
         history.push("/cart/verifypayment")
     }

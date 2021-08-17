@@ -7,11 +7,13 @@ const phones = {
             model: "iPhone 6",
             image:"/phones/iphone6.png",
             price:3_000_000,
+            comments:[],
             specifications:{
                 cpu:"A8",
                 ram:"1",
                 rom:"32",
                 display:"5",
+                connection:"3G"
             }
         },
         {
@@ -26,6 +28,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5",
+                connection:"3G"
             }
         },
         {
@@ -40,6 +43,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5",
+                connection:"4G"
             }
         },
         {
@@ -54,6 +58,7 @@ const phones = {
                 ram:"3",
                 rom:"128",
                 display:"5.5",
+                connection:"4G"
             }
         },
         {
@@ -68,6 +73,7 @@ const phones = {
                 ram:"4",
                 rom:"128",
                 display:"6",
+                connection:"5G"
             }
         },
         {
@@ -82,6 +88,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"2G"
             }
         },
         {
@@ -96,6 +103,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"3G"
             }
         },
         {
@@ -110,6 +118,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"4G"
             }
         },
         {
@@ -124,6 +133,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"4G"
             }
         },
         {
@@ -138,6 +148,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"4G"
             }
         },
         {
@@ -152,6 +163,7 @@ const phones = {
                 ram:"2",
                 rom:"64",
                 display:"5.5",
+                connection:"5G"
             }
         },
     ],

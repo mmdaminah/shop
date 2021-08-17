@@ -1,5 +1,5 @@
 @font-face {
-  font-family: vazir;
+  font-family: Vazir;
   src: url('./Assets/Vazir.ttf');
 }
 html, body, #root {
@@ -11,5 +11,5 @@ html, body, #root {
 * {
   box-sizing: border-box;
   direction: rtl;
-  font-family: 'vazir';
+  font-family: 'Vazir';
 }

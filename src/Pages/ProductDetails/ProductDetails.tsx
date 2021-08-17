@@ -6,8 +6,16 @@ import PhotoViewr from '../../Components/PhotoViewer/PhotoViewr'
 import { Form, Nav, Table } from 'react-bootstrap'
 import { useHistory } from 'react-router'
 import { MdShoppingCart } from "react-icons/md";
+import ProductSlider from '../../Components/ProductSlider/ProductSlider'
 import './ProductDetails.style.css'
+import axios from 'axios'
 const ProductDetails = (props: RouteComponentProps) => {
+    const [comment, setComment] = useState({
+        name: "",
+        email: "",
+        comment: ""
+    })
+    const [windowWidth, setWindowWith] = useState(window.innerWidth)
     const [items, setItems] = useState<IProduct[]>([])
     const location = useLocation()
     const { id } = useParams<{ id: string }>();
@@ -25,28 +33,48 @@ const ProductDetails = (props: RouteComponentProps) => {
     }
     useEffect(() => {
         request(`/${category}`, "" + category)
+        window.addEventListener("resize", () => {
+            setWindowWith(window.innerWidth)
+        })
     }, [])
-
+    const handleComment = (event: React.FormEvent) => {
+        const data = event.target as HTMLInputElement;
+        console.log(data.value)
+        setComment({ ...comment, [data.name]: data.value })
+    }
+    const handleCommentSubmit = (event: React.FormEvent) => {
+        event.preventDefault()
+        console.log(comment)
+        axios.post("/comment", {
+            comment,
+            id,
+            category
+        }).then((res) => {
+            console.log(res.data)
+        })
+    }
     return (
-        <div className="w-100" style={{ marginTop: "4rem",backgroundColor:"#fbfbfb" }}>
+        <div className="w-100" style={{ marginTop: "4rem", backgroundColor: "#fbfbfb" }}>
             <div className="container p-3">
                 <span>{product?.model}</span>
-                <span style={{cursor:"pointer"}} onClick={()=>history.push(`/category${product?.category}`)}> &lt; {product?.category}</span>
-                <span style={{cursor:"pointer"}} onClick={()=>history.push("/homepage")}> &lt; home</span>
+                <span style={{ cursor: "pointer" }} onClick={() => history.push(`/category${product?.category}`)}> &lt; {product?.category}</span>
+                <span style={{ cursor: "pointer" }} onClick={() => history.push("/homepage")}> &lt; home</span>
             </div>
             <div className="container w-100">
                 <div className="w-100 d-flex bg-white p-3 card-container">
                     <div className="row w-100">
-                        <div className="col-5">
-                            <PhotoViewr />
+                        <div className="col-lg-5 col-12">
+                            <PhotoViewr photo={product?.image} />
                         </div>
-                        <div className="col-3">
-                            <div>
+                        <div className="col-lg-3 col-12">
+                            <div className="text-center my-3">
                                 <h1>{product?.model}</h1>
                             </div>
                         </div>
-                        <div className="col-4">
-                            <div className="bg-light text-center rounded w-100 h-100">
+                        <div className="col-lg-4 col-12">
+                            <div className="bg-light text-center rounded w-100 p-3"
+                                style={{ boxShadow: "rgb(0 0 0 / 10%) -1px 7px 12px 7px", borderRadius: "8px" }}
+                            >
                                 <h4 className="py-4">فروشنده:ممدکامپیوتر</h4>
                                 <hr />
                                 <select className="my-2" name="" id="">
@@ -57,10 +85,10 @@ const ProductDetails = (props: RouteComponentProps) => {
                                 <h5>موجود در انبار</h5>
                                 <hr />
                                 <h4 className="my-2">{product?.price} تومان</h4>
-                                <button 
-                                style={{backgroundColor:"#3bc9a7"}}
-                                className="btn text-white w-100 my-3 p-3">
-                                <MdShoppingCart/><span>افزودن به سبد خرید</span>
+                                <button
+                                    style={{ backgroundColor: "#3bc9a7" }}
+                                    className="btn text-white w-100 my-3 p-3">
+                                    <MdShoppingCart /><span>افزودن به سبد خرید</span>
                                 </button>
                             </div>
                         </div>
@@ -78,57 +106,76 @@ const ProductDetails = (props: RouteComponentProps) => {
                             <Nav.Link href="#addComments">افزودن نظر</Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    <div className="w-100 my-2 p-2 card-container" id="specs">
-                        <h3>مشخصات</h3>
-                        <Table className="w-50 mx-auto text-center" striped bordered hover>
-                            <tbody>
-                                <tr>
-                                    <td className="w-50">پردازنده</td>
-                                    <td className="w-50">{product?.specifications?.cpu}</td>
-                                </tr>
-                                <tr>
-                                    <td>حافظه داخلی</td>
-                                    <td>{product?.specifications?.rom}</td>
-                                </tr>
-                                <tr>
-                                    <td>رم</td>
-                                    <td>{product?.specifications?.ram}</td>
-                                </tr>
-                                <tr>
-                                    <td>صفحه نمایش</td>
-                                    <td>{product?.specifications?.display}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                    <div className="w-100 my-5 p-2" id="specs">
+                        <div className="container">
+                            <h3>مشخصات</h3>
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <td className="p-3" style={{ width: "30%", backgroundColor: "#F8F8F8" }}>پردازنده</td>
+                                        <td className="bg-white p-3">{product?.specifications?.cpu}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3" style={{ width: "30%", backgroundColor: "#F8F8F8" }}>حافظه داخلی</td>
+                                        <td className="bg-white p-3">{product?.specifications?.rom}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3" style={{ width: "30%", backgroundColor: "#F8F8F8" }}>رم</td>
+                                        <td className="bg-white p-3">{product?.specifications?.ram}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3" style={{ width: "30%", backgroundColor: "#F8F8F8" }}>صفحه نمایش</td>
+                                        <td className="bg-white p-3">{product?.specifications?.display}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </div>
                     </div>
-                    <div id="comments" className="my-2 p-2 card-container">
+
+                    <div id="comments" className="my-5 p-2 card-container">
                         <h3>دیدگاه کاربران</h3>
                         <hr />
                         <div className="bg-light">
                             <h6>ممد زامبی</h6>
                             <p>
-                            آقا مفتش گرونه نخرید که رفته تو پاچتون.از ما گفتن بود از شما نشنیدن 
+                                آقا مفتش گرونه نخرید که رفته تو پاچتون.از ما گفتن بود از شما نشنیدن
                             </p>
                         </div>
                         <div className="bg-light">
                             <h6>علی راستگو</h6>
                             <p>
-                            بهترین گوشی دنیاس رو دستش نیومده و دیگه هم نمیاد تامام
+                                بهترین گوشی دنیاس رو دستش نیومده و دیگه هم نمیاد تامام
                             </p>
                         </div>
+                        {
+                            product?.comments && product?.comments.map((comment, index) => (
+                                <div className="bg-light">
+                                    <h6>{comment.name}</h6>
+                                    <p>
+                                        {comment.comment}   
+                                    </p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <div>
+                        <ProductSlider url={`/${category}`} title="محصولات مرتبط" textColor="text-black" />
                     </div>
                     <div id="addComments" className="my-2 p-2 w-100 card-container">
                         <h3>افزودن دیدگاه</h3>
 
                         <hr />
-                        <Form className="w-50">
+                        <Form
+                            onSubmit={handleCommentSubmit}
+                            onChange={handleComment}
+                            className={`${windowWidth < 500 ? "w-100" : "w-50"}`}>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>نام</Form.Label>
+                                <Form.Control name="name" type="text" placeholder="نام خود را وارد کنید" />
                                 <Form.Label>آدرس ایمیل</Form.Label>
-                                <Form.Control type="email" placeholder="name@example.com" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                <Form.Control name="email" type="email" placeholder="ایمیل خود را وارد کنید" />
                                 <Form.Label>دیدگاه شما</Form.Label>
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control name="comment" as="textarea" rows={3} />
                             </Form.Group>
                             <button className="btn btn-primary">ثبت نظر</button>
                         </Form>

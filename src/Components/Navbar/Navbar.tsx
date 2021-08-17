@@ -72,104 +72,104 @@ const MyNavbar = () => {
         <Navbar fixed="top" bg="white" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
                 <Navbar.Brand className="" onClick={() => history.push("/homepage")} href="#">آل دیجیتال</Navbar.Brand>
-                {windowWidth < 500 &&  <div><div>با ما تماس بگیرید</div><div style={{direction:"ltr"}}>09371522920</div></div>}
-                { windowWidth > 500 &&
-                <Form className="d-flex mx-auto" style={{ width: "35%" }}>
-                    <div className="w-100" style={{ position: "relative" }}>
-                        <div className="w-100 mx-auto" style={{ position: "relative" }}>
-                            <FormControl
-                                type=""
-                                placeholder="به دنبال چه چیزی می گردید؟"
-                                className="mr-2"
-                                aria-label="Search"
-                                onChange={handleSearch}
-                                value={inputSearch}
-                                style={{ borderRadius: "35px", backgroundColor: "#fbfbfb", fontSize: "0.8rem" }}
-                            />
-                            <MdSearch
-                                style={{ position: "absolute", bottom: "11px", left: "8px" }} />
-                        </div>
-                        <div className="bg-light w-75" style={{ borderRadius: "10px", height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`, position: "absolute", right: "12%", overflowY: "scroll" }}>
-                            {
-                                searchItems?.map((item) => {
-                                    return (
-                                        <div
-                                            onClick={() => handleSearchClick(item.id, item.category)}
-                                            className="d-flex w-100">
-                                            <div><img style={{ width: "80px", height: "80px" }} src={item.image} alt="" /></div>
-                                            <div>
-                                                <div>{item.model}</div>
-                                                <div>{item.category}</div>
+                {windowWidth < 500 && <div><div>با ما تماس بگیرید</div><div style={{ direction: "ltr" }}>09371522920</div></div>}
+                {windowWidth > 500 &&
+                    <Form className="d-flex mx-auto" style={{ width: "35%" }}>
+                        <div className="w-100" style={{ position: "relative" }}>
+                            <div className="w-100 mx-auto" style={{ position: "relative" }}>
+                                <FormControl
+                                    type=""
+                                    placeholder="به دنبال چه چیزی می گردید؟"
+                                    className="mr-2"
+                                    aria-label="Search"
+                                    onChange={handleSearch}
+                                    value={inputSearch}
+                                    style={{ borderRadius: "35px", backgroundColor: "#fbfbfb", fontSize: "0.8rem" }}
+                                />
+                                <MdSearch
+                                    style={{ position: "absolute", bottom: "9px", left: "8px" }} />
+                            </div>
+                            <div className="bg-light w-75" style={{ borderRadius: "10px", height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`, position: "absolute", right: "12%", overflowY: "scroll" }}>
+                                {
+                                    searchItems?.map((item) => {
+                                        return (
+                                            <div
+                                                onClick={() => handleSearchClick(item.id, item.category)}
+                                                className="d-flex w-100">
+                                                <div><img style={{ width: "80px", height: "80px" }} src={item.image} alt="" /></div>
+                                                <div>
+                                                    <div>{item.model}</div>
+                                                    <div>{item.category}</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                })
-                            }
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                    </div>
-                </Form> }
-                { windowWidth > 500 &&
-                <div className="d-flex flex-row-reverse" style={{ width: "22%" }}>
-                    <Nav.Link style={{ width: "50px", height: "50px", position: "relative" }}>
-                        <div style={{ position: "relative" }}
-                            onClick={() => setCartShow(!cartShow)}
-                        >
-                            <Badge pill bg="warning"
-                                style={{ position: "absolute" }}
+                    </Form>}
+                {windowWidth > 500 &&
+                    <div className="d-flex flex-row-reverse" style={{ width: "22%" }}>
+                        <Nav.Link style={{ width: "50px", height: "50px", position: "relative" }}>
+                            <div style={{ position: "relative" }}
+                                onClick={() => setCartShow(!cartShow)}
                             >
-                                {cartItems.length}
-                            </Badge>
-                            <MdShoppingCart
-                                onMouseEnter={() => setCartIconStyle("#06a0a7")}
-                                onMouseLeave={() => setCartIconStyle("#b8e3e6")}
+                                <Badge pill bg="warning"
+                                    style={{ position: "absolute" }}
+                                >
+                                    {cartItems.length}
+                                </Badge>
+                                <MdShoppingCart
+                                    onMouseEnter={() => setCartIconStyle("#06a0a7")}
+                                    onMouseLeave={() => setCartIconStyle("#b8e3e6")}
+                                    style={{
+                                        width: "40px",
+                                        height: "40px",
+                                        padding: "5px",
+                                        backgroundColor: `${cartIconStyle}`,
+                                        borderRadius: "50%"
+                                    }} />
+                            </div>
+                            {cartShow && <div className="bg-light" style={{ position: "absolute", left: "10%", height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 100 : 0}px`, overflowY: "scroll" }}>
+                                {
+                                    cartItems.map((item) => {
+                                        return (
+                                            <div className="d-flex w-100 p-3">
+                                                <div className="w-100 text-center">
+                                                    <img style={{ width: "100px", height: "100px" }} src={item.image} alt="" />
+                                                </div>
+                                                <div>
+                                                    <div>{item.model}</div>
+                                                    <div>{item.price}</div>
+                                                    <div>{item.count}</div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {
+                                    cartItems.length === 0 ?
+                                        <div>سبد خرید خالی است</div> :
+                                        <button
+                                            onClick={() => history.push("/cart")}
+                                            className="btn btn-danger">ثبت سفارش</button>
+                                }
+                            </div>}
+                        </Nav.Link>
+                        <Nav.Link href="#link" >
+                            <MdAccountCircle
+                                onMouseEnter={() => setUserIconStyle("#06a0a7")}
+                                onMouseLeave={() => setUserIconStyle("#b8e3e6")}
                                 style={{
                                     width: "40px",
                                     height: "40px",
                                     padding: "5px",
-                                    backgroundColor: `${cartIconStyle}`,
+                                    backgroundColor: `${userIconStyle}`,
                                     borderRadius: "50%"
-                                }} />
-                        </div>
-                        {cartShow && <div className="bg-light" style={{ position: "absolute", left: "10%", height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 100 : 0}px`, overflowY: "scroll" }}>
-                            {
-                                cartItems.map((item) => {
-                                    return (
-                                        <div className="d-flex w-100 p-3">
-                                            <div className="w-100 text-center">
-                                                <img style={{ width: "100px", height: "100px" }} src={item.image} alt="" />
-                                            </div>
-                                            <div>
-                                                <div>{item.model}</div>
-                                                <div>{item.price}</div>
-                                                <div>{item.count}</div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                            {
-                                cartItems.length === 0 ?
-                                    <div>سبد خرید خالی است</div> :
-                                    <button
-                                        onClick={() => history.push("/cart")}
-                                        className="btn btn-danger">ثبت سفارش</button>
-                            }
-                        </div>}
-                    </Nav.Link>
-                    <Nav.Link href="#link" >
-                        <MdAccountCircle
-                            onMouseEnter={() => setUserIconStyle("#06a0a7")}
-                            onMouseLeave={() => setUserIconStyle("#b8e3e6")}
-                            style={{
-                                width: "40px",
-                                height: "40px",
-                                padding: "5px",
-                                backgroundColor: `${userIconStyle}`,
-                                borderRadius: "50%"
-                            }}
-                        />
-                    </Nav.Link>
-                </div>}
+                                }}
+                            />
+                        </Nav.Link>
+                    </div>}
             </div>
             <div className="w-100 container">
                 {
@@ -179,35 +179,35 @@ const MyNavbar = () => {
                         style={{ position: "fixed", left: "0", bottom: "0" }}>
                         <div className="d-flex flex-column text-center">
                             <MdHome
-                                onClick={()=>history.push("/homepage")}
+                                onClick={() => history.push("/homepage")}
                                 style={{ width: "40px", height: "40px" }}
                             />
-                            <span style={{fontSize:"smaller"}}>خانه</span>
+                            <span style={{ fontSize: "smaller" }}>خانه</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdList
                                 style={{ width: "40px", height: "40px" }}
                             />
-                            <span style={{fontSize:"smaller"}}>دسته بندی</span>
+                            <span style={{ fontSize: "smaller" }}>دسته بندی</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdShoppingCart
-                                onClick={()=>history.push("/cart")}
+                                onClick={() => history.push("/cart")}
                                 style={{ width: "40px", height: "40px" }}
                             />
-                            <span style={{fontSize:"smaller"}}>سبد خرید</span>
+                            <span style={{ fontSize: "smaller" }}>سبد خرید</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdSearch
                                 style={{ width: "40px", height: "40px" }}
                             />
-                            <span style={{fontSize:"smaller"}}>جستجو</span>
+                            <span style={{ fontSize: "smaller" }}>جستجو</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdAccountCircle
                                 style={{ width: "40px", height: "40px" }}
                             />
-                            <span style={{fontSize:"smaller"}}>حساب</span>
+                            <span style={{ fontSize: "smaller" }}>حساب</span>
                         </div>
 
                     </div>
@@ -215,61 +215,61 @@ const MyNavbar = () => {
                 {navbarShow && windowWidth > 500 && <Nav
                     className={`d-flex flex-row w-100`}
                     activeKey="/home"
+                >   <div
+                    onMouseEnter={() => setCategoryShow(true)}
+                    onMouseLeave={() => setCategoryShow(false)}
                 >
-                    <Nav.Item className="">
-                        <Nav.Link className="" eventKey="link-1"
-                            onMouseEnter={() => setCategoryShow(true)}
-                        >دسته بندی
-                            {
-                                categoryShow && <div className="bg-light w-50"
-                                    style={{ position: "absolute", border: "1px solid #aecacc" }}
-                                >
-                                    <div className="container"
-                                        onMouseLeave={() => setCategoryShow(false)}
+                        <Nav.Item className="">
+                            <Nav.Link className="" eventKey="link-1"
+                            >دسته بندی
+                                {
+                                    categoryShow && <div className="bg-light w-50"
+                                        style={{ position: "absolute", border: "1px solid #aecacc" }}
                                     >
-                                        <div className="row">
-                                            <div className="col-4" style={{ backgroundColor: "#edfbfc" }}>
-                                                <Link style={{ textDecoration: "none" }} to="/categorymobile">
-                                                    <div className="my-2 p-1"
-                                                        onMouseEnter={() => setBrand(mbileBrands)}
-                                                    >گوشی</div>
-                                                </Link>
-                                                <Link style={{ textDecoration: "none" }} to="/categorytablet">
-                                                    <div className="my-2 p-1"
-                                                        onMouseEnter={() => setBrand(tabletBrands)}
-                                                    >تبلت</div>
-                                                </Link>
-                                                <Link style={{ textDecoration: "none" }} to="/categorylaptop">
-                                                    <div className="my-2 p-1"
-                                                        onMouseEnter={() => setBrand(laptopBrands)}
-                                                    >لپ تاپ</div>
-                                                </Link>
-                                            </div>
-                                            <div className="col-8">
-                                                {
-                                                    brand.map((item) => {
-                                                        return (
-                                                            <div key={Math.random() * 1000}>
-                                                                {item}
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
+                                        <div className="container">
+                                            <div className="row">
+                                                <div className="col-4" style={{ backgroundColor: "#edfbfc" }}>
+                                                    <Link style={{ textDecoration: "none" }} to="/categorymobile">
+                                                        <div className="my-2 p-1"
+                                                            onMouseEnter={() => setBrand(mbileBrands)}
+                                                        >گوشی</div>
+                                                    </Link>
+                                                    <Link style={{ textDecoration: "none" }} to="/categorytablet">
+                                                        <div className="my-2 p-1"
+                                                            onMouseEnter={() => setBrand(tabletBrands)}
+                                                        >تبلت</div>
+                                                    </Link>
+                                                    <Link style={{ textDecoration: "none" }} to="/categorylaptop">
+                                                        <div className="my-2 p-1"
+                                                            onMouseEnter={() => setBrand(laptopBrands)}
+                                                        >لپ تاپ</div>
+                                                    </Link>
+                                                </div>
+                                                <div className="col-8">
+                                                    {
+                                                        brand.map((item) => {
+                                                            return (
+                                                                <div key={Math.random() * 1000}>
+                                                                    {item}
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                        </Nav.Link>
+                                }
+                            </Nav.Link>
+                        </Nav.Item></div>
+                    <Nav.Item>
+                        <Nav.Link onClick={() => history.push("/categorymobile")}>گوشی</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link onClick={()=>history.push("/categorymobile")}>گوشی</Nav.Link>
+                        <Nav.Link onClick={() => history.push("/categorytablet")}>تبلت</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link onClick={()=>history.push("/categorytablet")}>تبلت</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link onClick={()=>history.push("/categorylaptop")}>لپ تاپ</Nav.Link>
+                        <Nav.Link onClick={() => history.push("/categorylaptop")}>لپ تاپ</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="link-2"
