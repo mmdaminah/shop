@@ -8,6 +8,7 @@ import Twitter from '../../Assets/Twitter.svg'
 import Enamad from '../../Assets/E-namad.png'
 import Union from '../../Assets/Unoin-namad.png'
 import { MdEmail, MdPhone, MdMap, MdNearMe } from "react-icons/md"
+import { Button, Form } from 'react-bootstrap'
 const Footer = () => {
     return (
         <div className="w-100 bg-light">
@@ -52,9 +53,12 @@ const Footer = () => {
                             <div><img className="icon-social mx-3" src={Twitter} alt="" /></div>
                         </div>
                         <div className="text-center"><h5>اطلاع از جدیدترین تخفیفات</h5></div>
-                        <div className="mt-4">
-                            <input className="w-75" type="email" placeholder="ایمیل خود را وارد کنید..." />
-                            <button>عضویت</button>
+                        <div className="mt-4 d-flex ">
+                            {/* <input className="w-75" type="email" placeholder="ایمیل خود را وارد کنید..." /> */}
+                            <Form.Control
+                            style={{borderRadius:"24px"}} 
+                            className="w-75" type="text" placeholder="ایمیل خود را وارد کنید..."/>
+                            <Button size="sm" className="mx-1" variant="outline-primary">عضویت</Button>
                         </div>
                     </div>
                     <hr className="my-4" />

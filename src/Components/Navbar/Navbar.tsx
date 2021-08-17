@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { MdShoppingCart, MdAccountCircle, MdHome, MdList, MdSearch } from "react-icons/md";
-import { Navbar, Nav, Form, FormControl, Dropdown, Badge } from 'react-bootstrap'
+import { Navbar, Nav, Form, FormControl, Badge, Offcanvas } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
@@ -62,12 +62,19 @@ const MyNavbar = () => {
     }, [handleNavigation]);
     //navbar scrollong
     const [categoryShow, setCategoryShow] = useState(false)
-    const mbileBrands = ['samsung', 'apple'];
-    const tabletBrands = ['samsung', 'apple', "microsoft"];
-    const laptopBrands = ['acer', 'asus', 'msi'];
+    const [searchShow, setSearchShow] = useState(false)
+    const mbileBrands = ["categorymobile", 'samsung', 'apple'];
+    const tabletBrands = ["categorytablet", 'samsung', 'apple', "microsoft"];
+    const laptopBrands = ["categorylaptop", 'Acer', 'Asus', 'MSI'];
     const [brand, setBrand] = useState(mbileBrands)
     const [cartIconStyle, setCartIconStyle] = useState("#b8e3e6")
     const [userIconStyle, setUserIconStyle] = useState("#b8e3e6")
+
+    const [showCategory, setshowCategory] = useState(false);
+    const handleClose = () => setshowCategory(false);
+    const handleShow = () => setshowCategory(true);
+    const handleCloseSearch = () => setSearchShow(false);
+    const handleShowSearch = () => setSearchShow(true);
     return (
         <Navbar fixed="top" bg="white" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
@@ -180,38 +187,125 @@ const MyNavbar = () => {
                         <div className="d-flex flex-column text-center">
                             <MdHome
                                 onClick={() => history.push("/homepage")}
-                                style={{ width: "40px", height: "40px" }}
+                                style={{ width: "40px", height: "40px", color: "#019ca7" }}
                             />
                             <span style={{ fontSize: "smaller" }}>خانه</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdList
-                                style={{ width: "40px", height: "40px" }}
+                                onClick={handleShow}
+                                style={{ width: "40px", height: "40px", color: "#019ca7" }}
                             />
                             <span style={{ fontSize: "smaller" }}>دسته بندی</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdShoppingCart
                                 onClick={() => history.push("/cart")}
-                                style={{ width: "40px", height: "40px" }}
+                                style={{ width: "40px", height: "40px", color: "#019ca7" }}
                             />
                             <span style={{ fontSize: "smaller" }}>سبد خرید</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdSearch
-                                style={{ width: "40px", height: "40px" }}
+                                onClick={handleShowSearch}
+                                style={{ width: "40px", height: "40px", color: "#019ca7" }}
                             />
                             <span style={{ fontSize: "smaller" }}>جستجو</span>
                         </div>
                         <div className="d-flex flex-column text-center">
                             <MdAccountCircle
-                                style={{ width: "40px", height: "40px" }}
+                                style={{ width: "40px", height: "40px", color: "#019ca7" }}
                             />
                             <span style={{ fontSize: "smaller" }}>حساب</span>
                         </div>
-
                     </div>
                 }
+                <Offcanvas className="w-100" show={showCategory} onHide={handleClose} placement="end">
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>دسته بندی</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <div style={{ textDecoration: "none" }} >
+                            <div
+                                onClick={() => { history.push("/categorymobile"); handleClose() }}
+                                className="my-2 p-1">گوشی</div>
+                            <ul>
+                                {
+                                    mbileBrands.map((item, index) => {
+                                        if (index > 0)
+                                            return (
+                                                <li
+                                                    onClick={() => { history.push(`/${mbileBrands[0]}?brand=${item}`); handleClose() }} key={Math.random() * 1000}>
+                                                    {item}
+                                                </li>
+                                            )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <div style={{ textDecoration: "none" }} >
+                            <div
+                                onClick={() => { history.push("/categorytablet"); handleClose() }}
+                                className="my-2 p-1">تبلت</div>
+                            <ul>
+                                {
+                                    tabletBrands.map((item, index) => {
+                                        if (index > 0)
+                                            return (
+                                                <li
+                                                    onClick={() => { history.push(`/${tabletBrands[0]}?brand=${item}`); handleClose() }} key={Math.random() * 1000}>
+                                                    {item}
+                                                </li>
+                                            )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <div style={{ textDecoration: "none" }} >
+                            <div
+                                onClick={() => { history.push("/categorylaptop"); handleClose() }}
+                                className="my-2 p-1">لپ تاپ</div>
+                            <ul>
+                                {
+                                    laptopBrands.map((item, index) => {
+                                        if (index > 0)
+                                            return (
+                                                <li
+                                                    onClick={() => { history.push(`/${laptopBrands[0]}?brand=${item}`); handleClose() }} key={Math.random() * 1000}>
+                                                    {item}
+                                                </li>
+                                            )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    </Offcanvas.Body>
+                </Offcanvas>
+                <Offcanvas className="w-100" show={searchShow} onHide={handleCloseSearch} placement="end">
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>جستجو</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <Form.Control onChange={handleSearch}
+                            style={{ borderRadius: "24px" }}
+                            className="w-100" type="text" placeholder="به دنبال چه چیزی میگردید..." />
+                        {
+                            searchItems?.map((item) => {
+                                return (
+                                    <div
+                                        onClick={() => handleSearchClick(item.id, item.category)}
+                                        className="d-flex w-100">
+                                        <div><img style={{ width: "120px", height: "120px" }} src={item.image} alt="" /></div>
+                                        <div>
+                                            <div>{item.model}</div>
+                                            <div>{item.category}</div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </Offcanvas.Body>
+                </Offcanvas>
                 {navbarShow && windowWidth > 500 && <Nav
                     className={`d-flex flex-row w-100`}
                     activeKey="/home"
@@ -247,12 +341,13 @@ const MyNavbar = () => {
                                                 </div>
                                                 <div className="col-8">
                                                     {
-                                                        brand.map((item) => {
-                                                            return (
-                                                                <div key={Math.random() * 1000}>
-                                                                    {item}
-                                                                </div>
-                                                            )
+                                                        brand.map((item, index) => {
+                                                            if (index > 0)
+                                                                return (
+                                                                    <div onClick={() => history.push(`/${brand[0]}?brand=${item}`)} key={Math.random() * 1000}>
+                                                                        {item}
+                                                                    </div>
+                                                                )
                                                         })
                                                     }
                                                 </div>
