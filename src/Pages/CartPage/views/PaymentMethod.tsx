@@ -71,6 +71,18 @@ const PaymentMethod = (props: RouteComponentProps) => {
                         </div>
                     </div>
                 </div>
+                {
+                    windowWidth < 500 &&
+                    <Button className="w-100"
+                        style={{
+                            position: "sticky", left: "0", bottom: "12%",
+                            backgroundColor: "#3BC9A7"
+                        }}
+                        onClick={handleClick}
+                    >
+                        پرداخت و ثبت نهایی
+                    </Button>
+                }
             </div>
             {
                 windowWidth > 500 &&

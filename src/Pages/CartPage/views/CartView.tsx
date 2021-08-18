@@ -33,7 +33,7 @@ const CartView = (props: RouteComponentProps) => {
         })
     }, [])
     // dispatch({type:"resetCart"})
-    const handleClick = ()=>{
+    const handleClick = () => {
         localDispatch({ type: "addCart", payload: cartItems })
         history.push("/cart/verifyaddress")
     }
@@ -101,7 +101,15 @@ const CartView = (props: RouteComponentProps) => {
                         </div>
                     </Modal.Body>
                 </Modal>
-                <button onClick={() => localDispatch({ type: "addCart", payload: cartItems })}>click</button>
+                { windowWidth < 500 &&
+                <Button className="w-100"
+                    style={{ position: "sticky", left:"0",bottom: "12%",
+                    backgroundColor: "#3BC9A7" }}
+                    onClick={handleClick}
+                    >
+                        ادامه و انتخاب آدرس و شیوه ارسال
+                </Button>
+                }
             </div>
             {
                 windowWidth > 500 &&
@@ -139,7 +147,7 @@ const CartView = (props: RouteComponentProps) => {
                                 style={{ fontSize: "small", backgroundColor: "#3BC9A7" }}
                                 onClick={handleClick}
                                 className="btn btn-success w-100">
-                                    ادامه و انتخاب آدرس و شیوه ارسال
+                                ادامه و انتخاب آدرس و شیوه ارسال
                             </button>
                         </div>
                     </div>

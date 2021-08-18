@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import { RouteComponentProps } from 'react-router-dom'
 import ICartProducts from '../../../Interfaces/CartProduct'
 import ICart from '../../../Interfaces/CartInterface'
@@ -49,7 +49,7 @@ const VerifyAdress = (props: RouteComponentProps) => {
         const data = event.target as HTMLInputElement
         setPostMethod(data.value)
     }
-    const handleClick = ()=>{
+    const handleClick = () => {
         localDispatch({ type: "addUserInfo", payload: { userInfo, postMethod } })
         history.push("/cart/payment")
     }
@@ -128,7 +128,18 @@ const VerifyAdress = (props: RouteComponentProps) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={() => localDispatch({ type: "addUserInfo", payload: { userInfo, postMethod } })}>click</button>
+                {
+                    windowWidth < 500 &&
+                    <Button className="w-100"
+                        style={{
+                            position: "sticky", left: "0", bottom: "12%",
+                            backgroundColor: "#3BC9A7"
+                        }}
+                        onClick={handleClick}
+                    >
+                        ادامه و انتخاب روش پرداخت
+                    </Button>
+                }
             </div>
             {
                 windowWidth > 500 &&
@@ -166,7 +177,7 @@ const VerifyAdress = (props: RouteComponentProps) => {
                                 style={{ fontSize: "small", backgroundColor: "#3BC9A7" }}
                                 onClick={handleClick}
                                 className="btn btn-success w-100">ادامه و انتخاب روش پرداخت
-                                </button>
+                            </button>
                         </div>
                     </div>
                 </div>

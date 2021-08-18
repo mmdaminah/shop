@@ -126,7 +126,7 @@ const phones = {
             category: "mobile",
             brand: "samsung",
             model: "Galaxy S9",
-            image:"/phones/galaxys9.jpg",
+            image:"/phones/galaxyS9.webp",
             price:4_200_000,
             specifications:{
                 cpu:"A50",
@@ -156,7 +156,7 @@ const phones = {
             category: "mobile",
             brand: "samsung",
             model: "Galaxy S11",
-            image:"/phones/galaxys11.jpg",
+            image:"/phones/galaxyS11.jpg",
             price:23_000_000,
             specifications:{
                 cpu:"A50",

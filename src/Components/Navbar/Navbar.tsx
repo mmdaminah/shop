@@ -381,7 +381,7 @@ const MyNavbar = () => {
                                                         brand.map((item, index) => {
                                                             if (index > 0)
                                                                 return (
-                                                                    <div onClick={() => history.push(`/${brand[0]}?brand=${item}`)} key={Math.random() * 1000}>
+                                                                    <div className="p-1" onClick={() => history.push(`/${brand[0]}?brand=${item}`)} key={Math.random() * 1000}>
                                                                         {item}
                                                                     </div>
                                                                 )
