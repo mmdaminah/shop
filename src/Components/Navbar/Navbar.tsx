@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { MdShoppingCart, MdAccountCircle, MdHome, MdList, MdSearch } from "react-icons/md";
-import { Navbar, Nav, Form, FormControl, Badge, Offcanvas } from 'react-bootstrap'
+import { MdShoppingCart, MdAccountCircle, MdHome, MdList, MdSearch, MdDelete } from "react-icons/md";
+import { Navbar, Nav, Form, FormControl, Badge, Offcanvas, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
@@ -96,7 +96,9 @@ const MyNavbar = () => {
                                 <MdSearch
                                     style={{ position: "absolute", bottom: "9px", left: "8px" }} />
                             </div>
-                            <div className="bg-light w-75" style={{ borderRadius: "10px", height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`, position: "absolute", right: "12%", overflowY: "scroll" }}>
+                            <div className="bg-light w-100" 
+                            style={{ height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`, 
+                            position: "absolute", left:"0", overflowY: "scroll" }}>
                                 {
                                     searchItems?.map((item) => {
                                         return (
@@ -104,7 +106,7 @@ const MyNavbar = () => {
                                                 onClick={() => handleSearchClick(item.id, item.category)}
                                                 className="d-flex w-100">
                                                 <div><img style={{ width: "80px", height: "80px" }} src={item.image} alt="" /></div>
-                                                <div>
+                                                <div className="p-3">
                                                     <div>{item.model}</div>
                                                     <div>{item.category}</div>
                                                 </div>
@@ -117,9 +119,10 @@ const MyNavbar = () => {
                     </Form>}
                 {windowWidth > 500 &&
                     <div className="d-flex flex-row-reverse" style={{ width: "22%" }}>
-                        <Nav.Link style={{ width: "50px", height: "50px", position: "relative" }}>
+                        <Nav.Link style={{ position: "relative" }}>
                             <div style={{ position: "relative" }}
-                                onClick={() => setCartShow(!cartShow)}
+                                onMouseEnter={() => setCartShow(!cartShow)}
+                            onMouseLeave={() => setCartShow(!cartShow)}
                             >
                                 <Badge pill bg="warning"
                                     style={{ position: "absolute" }}
@@ -136,32 +139,66 @@ const MyNavbar = () => {
                                         backgroundColor: `${cartIconStyle}`,
                                         borderRadius: "50%"
                                     }} />
-                            </div>
-                            {cartShow && <div className="bg-light" style={{ position: "absolute", left: "10%", height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 100 : 0}px`, overflowY: "scroll" }}>
                                 {
-                                    cartItems.map((item) => {
-                                        return (
-                                            <div className="d-flex w-100 p-3">
-                                                <div className="w-100 text-center">
-                                                    <img style={{ width: "100px", height: "100px" }} src={item.image} alt="" />
-                                                </div>
-                                                <div>
-                                                    <div>{item.model}</div>
-                                                    <div>{item.price}</div>
-                                                    <div>{item.count}</div>
-                                                </div>
+                                    cartShow &&
+                                    <div style={{
+                                        position: "absolute", left: "0",
+                                        height: "300px"
+                                    }}>
+                                        <div className="bg-light"
+                                            style={{
+                                                width: "320px", overflowY: "scroll",
+                                                height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 120 : 0}px`
+                                            }}>
+                                            <div>
+                                                {
+                                                    cartItems.map((item) => {
+                                                        return (
+                                                            <div className="d-flex p-3">
+                                                                <div className="w-100 text-center">
+                                                                    <img style={{ width: "100px", height: "100px" }} src={item.image} alt="" />
+                                                                </div>
+                                                                <div className="w-50 d-flex">
+                                                                    <div className="d-flex flex-column justify-content-between align-items-center">
+                                                                        <div>{item.model}</div>
+                                                                        <div>{(+item.price)*(+item.count)}تومان</div>
+                                                                        <div className="d-flex align-items-center">
+                                                                            <Button
+                                                                                onClick={() => dispatch({ type: "addProduct", payload: { id: item.id, model: item.model, action: "increase" } })}
+                                                                                variant="success" size="sm">+</Button>
+                                                                            <div className="mx-2">{item.count}</div>
+                                                                            <Button
+                                                                                onClick={() => dispatch({ type: "addProduct", payload: { id: item.id, model: item.model, action: "decrease" } })}
+                                                                                variant="danger" size="sm">-
+                                                                            </Button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="d-flex align-items-end">
+                                                                        <MdDelete
+                                                                            onClick={() => dispatch({ type: "delteProduct", payload: { id: item.id, model: item.model } })}
+                                                                            style={{ width: "40px", height: "40px", color: "#E05C5C" }} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
                                             </div>
-                                        )
-                                    })
+                                        </div>
+                                        <div className="bg-danger" style={{ width: "320px" }}>
+                                            {
+                                                cartItems.length === 0 ?
+                                                    <div>سبد خرید خالی است</div> :
+                                                    <div className="text-center">
+                                                        <button
+                                                            onClick={() => history.push("/cart")}
+                                                            className="btn btn-danger w-100">ثبت سفارش</button>
+                                                    </div>
+                                            }
+                                        </div>
+                                    </div>
                                 }
-                                {
-                                    cartItems.length === 0 ?
-                                        <div>سبد خرید خالی است</div> :
-                                        <button
-                                            onClick={() => history.push("/cart")}
-                                            className="btn btn-danger">ثبت سفارش</button>
-                                }
-                            </div>}
+                            </div>
                         </Nav.Link>
                         <Nav.Link href="#link" >
                             <MdAccountCircle
@@ -293,10 +330,10 @@ const MyNavbar = () => {
                             searchItems?.map((item) => {
                                 return (
                                     <div
-                                        onClick={() => handleSearchClick(item.id, item.category)}
+                                        onClick={() => { handleSearchClick(item.id, item.category); handleCloseSearch() }}
                                         className="d-flex w-100">
-                                        <div><img style={{ width: "120px", height: "120px" }} src={item.image} alt="" /></div>
-                                        <div>
+                                        <div className="w-50"><img className="w-100" src={item.image} alt="" /></div>
+                                        <div className="w-50 p-4">
                                             <div>{item.model}</div>
                                             <div>{item.category}</div>
                                         </div>
