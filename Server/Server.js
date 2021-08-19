@@ -114,14 +114,21 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
     const body = req.body;
     const user = users.find((item) => item.email === body.email);
-    bcrypt.compare(body.password, user.password, function (err, result) {
-        const token = generateAccessToken({ email: req.body.email });
-        const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, {
-            expiresIn: "300s",
+    if(user){
+        bcrypt.compare(body.password, user.password, function (err, result) {
+            const token = generateAccessToken({ email: req.body.email });
+            const refreshToken = jwt.sign({ email: body.email }, TOKEN_SECRET, {
+                expiresIn: "300s",
+            });
+            res.json({ accessToken: token, refreshToken, 
+                firstName:user.firstName, lastName:user.lastName,
+                 phoneNumber:user.phoneNumber });
+            // res.status(200).send("successed");
         });
-        res.json({ accessToken: token, refreshToken });
-        // res.status(200).send("successed");
-    });
+    }
+    else {
+        res.status(404).send("user not found")
+    }
 });
 app.post("/order", (req, res) => {
     const body = req.body;

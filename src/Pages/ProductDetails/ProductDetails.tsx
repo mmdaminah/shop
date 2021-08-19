@@ -9,6 +9,9 @@ import { MdShoppingCart } from "react-icons/md";
 import ProductSlider from '../../Components/ProductSlider/ProductSlider'
 import './ProductDetails.style.css'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ProductDetails = (props: RouteComponentProps) => {
     const [comment, setComment] = useState({
         name: "",
@@ -16,6 +19,7 @@ const ProductDetails = (props: RouteComponentProps) => {
         comment: ""
     })
     const [windowWidth, setWindowWith] = useState(window.innerWidth)
+    const dispatch = useDispatch()
     const [items, setItems] = useState<IProduct[]>([])
     const location = useLocation()
     const { id } = useParams<{ id: string }>();
@@ -53,6 +57,18 @@ const ProductDetails = (props: RouteComponentProps) => {
             console.log(res.data)
         })
     }
+    const handleAddProduct = ()=>{
+        dispatch({type:"addProduct",payload:product})
+        toast.success('کالا به سبد خرید اضافه شد', {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+    }
     return (
         <div className="w-100" style={{ marginTop: "4rem", backgroundColor: "#fbfbfb" }}>
             <div className="container p-3">
@@ -86,6 +102,7 @@ const ProductDetails = (props: RouteComponentProps) => {
                                 <hr />
                                 <h4 className="my-2">{product?.price} تومان</h4>
                                 <button
+                                    onClick={handleAddProduct}
                                     style={{ backgroundColor: "#3bc9a7" }}
                                     className="btn text-white w-100 my-3 p-3">
                                     <MdShoppingCart /><span>افزودن به سبد خرید</span>
@@ -182,6 +199,17 @@ const ProductDetails = (props: RouteComponentProps) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={true}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }

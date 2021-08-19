@@ -2,7 +2,10 @@ const initialState = {
     isLogin:"",
     accessToken:"",
     refreshToken:"",
-    role:""
+    role:"",
+    firstName:"",
+    lastName:"",
+    phoneNumber:""
 }
 const UserReducer = (state = initialState,action:any)=>{
     switch(action.type) {

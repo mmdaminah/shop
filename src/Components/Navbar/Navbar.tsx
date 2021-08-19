@@ -75,6 +75,8 @@ const MyNavbar = () => {
     const handleShow = () => setshowCategory(true);
     const handleCloseSearch = () => setSearchShow(false);
     const handleShowSearch = () => setSearchShow(true);
+    const [userAccount, setUserAccount] = useState(false)
+    const userInfo = useSelector<any, any>(state => state.User)
     return (
         <Navbar fixed="top" bg="white" expand="lg" className="w-100 d-flex flex-column">
             <div className="w-100 d-flex justify-content-between container">
@@ -96,9 +98,11 @@ const MyNavbar = () => {
                                 <MdSearch
                                     style={{ position: "absolute", bottom: "9px", left: "8px" }} />
                             </div>
-                            <div className="bg-light w-100" 
-                            style={{ height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`, 
-                            position: "absolute", left:"0", overflowY: "scroll" }}>
+                            <div className="bg-light w-100"
+                                style={{
+                                    height: `${searchItems ? searchItems.length * 100 > 500 ? 400 : searchItems.length * 100 : 0}px`,
+                                    position: "absolute", left: "0", overflowY: "scroll"
+                                }}>
                                 {
                                     searchItems?.map((item) => {
                                         return (
@@ -122,7 +126,7 @@ const MyNavbar = () => {
                         <Nav.Link style={{ position: "relative" }}>
                             <div style={{ position: "relative" }}
                                 onMouseEnter={() => setCartShow(!cartShow)}
-                            onMouseLeave={() => setCartShow(!cartShow)}
+                                onMouseLeave={() => setCartShow(!cartShow)}
                             >
                                 <Badge pill bg="warning"
                                     style={{ position: "absolute" }}
@@ -148,7 +152,7 @@ const MyNavbar = () => {
                                         <div className="bg-light"
                                             style={{
                                                 width: "320px", overflowY: "scroll",
-                                                height: `${cartItems ? cartItems.length * 100 > 500 ? 400 : cartItems.length * 120 : 0}px`
+                                                height: `${cartItems ? cartItems.length * 100 > 350 ? 400 : cartItems.length * 120 : 0}px`
                                             }}>
                                             <div>
                                                 {
@@ -161,7 +165,7 @@ const MyNavbar = () => {
                                                                 <div className="w-50 d-flex">
                                                                     <div className="d-flex flex-column justify-content-between align-items-center">
                                                                         <div>{item.model}</div>
-                                                                        <div>{(+item.price)*(+item.count)}تومان</div>
+                                                                        <div>{(+item.price) * (+item.count)}تومان</div>
                                                                         <div className="d-flex align-items-center">
                                                                             <Button
                                                                                 onClick={() => dispatch({ type: "addProduct", payload: { id: item.id, model: item.model, action: "increase" } })}
@@ -185,10 +189,11 @@ const MyNavbar = () => {
                                                 }
                                             </div>
                                         </div>
-                                        <div className="bg-danger" style={{ width: "320px" }}>
+                                        <div className="bg-light" style={{ width: "320px",
+                                        borderBottomRightRadius:"12px",borderBottomLeftRadius:"12px" }}>
                                             {
                                                 cartItems.length === 0 ?
-                                                    <div>سبد خرید خالی است</div> :
+                                                    <div className="text-center p-4">سبد خرید خالی است</div> :
                                                     <div className="text-center">
                                                         <button
                                                             onClick={() => history.push("/cart")}
@@ -201,17 +206,47 @@ const MyNavbar = () => {
                             </div>
                         </Nav.Link>
                         <Nav.Link href="#link" >
-                            <MdAccountCircle
-                                onMouseEnter={() => setUserIconStyle("#06a0a7")}
-                                onMouseLeave={() => setUserIconStyle("#b8e3e6")}
-                                style={{
-                                    width: "40px",
-                                    height: "40px",
-                                    padding: "5px",
-                                    backgroundColor: `${userIconStyle}`,
-                                    borderRadius: "50%"
-                                }}
-                            />
+                            <div
+                                onMouseEnter={() => setUserAccount(true)}
+                                onMouseLeave={() => setUserAccount(false)}
+                            >
+                                <MdAccountCircle
+                                    onMouseEnter={() => setUserIconStyle("#06a0a7")}
+                                    onMouseLeave={() => setUserIconStyle("#b8e3e6")}
+                                    style={{
+                                        width: "40px",
+                                        height: "40px",
+                                        padding: "5px",
+                                        backgroundColor: `${userIconStyle}`,
+                                        borderRadius: "50%"
+                                    }}
+                                />
+                                {
+                                    userAccount &&
+                                    <div
+                                        className="bg-light p-3"
+                                        style={{ width: "", height: "100px", position: "fixed",borderRadius:"10px" }}>
+                                        <div>
+                                            {
+                                                userInfo.firstName + " " + userInfo.lastName
+                                            }
+                                        </div>
+                                        {
+                                            userInfo.isLogin &&
+                                            <div onClick={() => dispatch({ type: "logout" })}>
+                                                خروج از حساب
+                                            </div>
+                                        }
+                                        {
+                                            !userInfo.isLogin &&
+                                            <div
+                                                onClick={() => history.push("/login")}
+                                            >ورود به حساب
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
                         </Nav.Link>
                     </div>}
             </div>
@@ -402,11 +437,6 @@ const MyNavbar = () => {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link onClick={() => history.push("/categorylaptop")}>لپ تاپ</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-2"
-                            onClick={() => dispatch({ type: "logout" })}
-                        >logout</Nav.Link>
                     </Nav.Item>
                 </Nav>}
             </div>

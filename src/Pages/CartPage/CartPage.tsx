@@ -9,7 +9,6 @@ import { useHistory } from 'react-router'
 import { useSelector } from 'react-redux'
 import { createContext, useReducer } from 'react';
 import CartInfoReducer from './CartInfoReducer';
-import ICartInformation from '../../Interfaces/CartInformation';
 export const context = createContext<any>({})
 const CartPage = (props: RouteComponentProps) => {
     const [localState, localDispatch] = useReducer(CartInfoReducer, {
@@ -19,7 +18,6 @@ const CartPage = (props: RouteComponentProps) => {
         paymentMethod: "",
         paymentBank: ""
     })
-    const cartItems = useSelector<ICart, ICartProducts[]>(state => state.cart.cartProducts)
     const history = useHistory();
     const [windowWidth, setWindowWith] = useState(window.innerWidth)
     const [state, setState] = useState([1, 0, 0, 0])

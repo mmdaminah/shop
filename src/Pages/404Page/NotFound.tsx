@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import "./NotFound.style.css"
 import { useHistory } from 'react-router'

@@ -1,4 +1,3 @@
-import { MdLaptop, MdSmartphone, MdTablet } from "react-icons/md";
 import './CategoryCard.css'
 import SmartPhone from '../../Assets/smartphone.svg'
 import Laptop from '../../Assets/laptop.svg'

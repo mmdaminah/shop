@@ -7,6 +7,8 @@ const routes = [
     {path:"",exact:true,Component:CartView},
     {path:"/verifyaddress",exact:true,Component:VerifyAddress},
     {path:"/payment",exact:true,Component:PaymentMethod},
-    {path:"/verifypayment",exact:true,Component:VerifyPayment},
+    {path:"/verifypayment",exact:true,Component:VerifyPayment
+    
+    },
 ]
 export default routes;

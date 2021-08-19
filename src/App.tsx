@@ -1,16 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import './App.css'
 import MyNavbar from './Components/Navbar/Navbar';
 import routes from './Routes/mainRoutes'
 import { Suspense } from 'react';
 import Fotoer from './Components/Footer/Footer'
-import { useSelector } from 'react-redux'
 import { Spinner } from 'react-bootstrap';
 import PrivateRotue from './Routes/PrivateRotue';
 function App() {
   document.title = "فروشگاه آل دیجیتال"
-  const cart = useSelector(state => state)
   return (
     <Router>
       <div className="app bg-light">

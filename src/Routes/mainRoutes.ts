@@ -14,7 +14,7 @@ const routes = [
     {path:'/dashboard',exact:false,Component:Dashboard,loginRequired:true},
     {path:'/category:name',exact:false,Component:Category,loginRequired:false},
     {path:'/productdetails:id',exact:false,Component:ProductDetails,loginRequired:false},
-    {path:'/cart',exact:false,Component:CartPage,loginRequired:false},
+    {path:'/cart',exact:false,Component:CartPage,loginRequired:true},
     {path:'*',exact:false,Component:NotFound,loginRequired:false},
 ]
 export default routes;
